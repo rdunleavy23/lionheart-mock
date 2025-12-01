@@ -18,7 +18,7 @@ import { programs } from "@/lib/programs-data";
 
 export default function HomePage() {
   return (
-    <main className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 space-y-16">
+    <main className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 space-y-12 md:space-y-16">
       {/* 1. HERO SECTION */}
       <section aria-label="Hero section">
         <div className="grid gap-8 md:grid-cols-2 md:gap-10 md:items-center">
@@ -27,12 +27,11 @@ export default function HomePage() {
             <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               Quality childcare rooted in Christ's love.
             </h1>
-            <p className="text-lg text-muted-foreground sm:text-xl leading-relaxed">
-              A safe, joyful place where children are known, loved, and equipped to thrive—academically, socially, and spiritually. 
-              We welcome families of all backgrounds, offering exceptional early education with biblical foundations that prepare 
-              your child for school success while nurturing their heart and character.
+            <p className="text-lg text-muted-foreground sm:text-xl leading-relaxed max-w-[65ch]">
+              A safe, joyful place where children are known, loved, and equipped to thrive. 
+              Exceptional early education with biblical foundations that prepare your child for school success.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="text-base font-semibold">
                 <Link href="#location-search">Find a location</Link>
               </Button>
@@ -106,27 +105,10 @@ export default function HomePage() {
           <h2 className="mb-4 text-3xl font-bold text-foreground">
             Why families choose Lionheart
           </h2>
-          <div className="space-y-4 text-muted-foreground">
-            <p>
-              At Lionheart Children's Academy, we believe every child is uniquely created and deserves 
-              exceptional care. Our Christ-centered approach means your child will experience genuine 
-              love and acceptance, while our high-quality early education curriculum prepares them for 
-              school success. We integrate biblical values naturally—teaching kindness, respect, and 
-              compassion through daily interactions and age-appropriate Bible stories.
-            </p>
-            <p>
-              Safety and security are foundational. Every center is licensed and accredited, with secure 
-              entry systems, background-checked staff, and rigorous health protocols. Our teachers are 
-              trained professionals who genuinely care about your child's development—academically, 
-              socially, and spiritually.
-            </p>
-            <p>
-              We welcome families of all backgrounds. Whether you're actively involved in a church or 
-              simply seeking trustworthy, loving care for your child, you'll find a warm, inclusive 
-              environment where your family belongs. Our faith-forward approach is never exclusive or 
-              harsh—it's simply part of who we are and how we care for children.
-            </p>
-          </div>
+          <p className="mb-6 max-w-[65ch] text-muted-foreground">
+            Every child deserves exceptional care. We combine high-quality early education with biblical 
+            foundations, creating a safe, loving environment where children thrive.
+          </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <Card>
@@ -192,9 +174,8 @@ export default function HomePage() {
       <section aria-label="Programs by age">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">Programs by age</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Every child is unique. Our age-appropriate programs nurture development at each stage, 
-            combining exceptional care with biblical foundations.
+          <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
+            Age-appropriate programs that nurture development at each stage.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -273,44 +254,35 @@ export default function HomePage() {
             <h2 className="mb-6 text-3xl font-bold text-foreground">
               Safety, trust, and spiritual care
             </h2>
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">Licensed and accredited programs:</strong> Every 
-                  Lionheart center meets or exceeds state licensing requirements and maintains 
-                  accreditation standards.
+                  <strong className="text-foreground">Licensed & accredited:</strong> Every center meets state requirements.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">Security:</strong> Secure entrances, check-in/out 
-                  systems, and controlled access ensure your child's safety throughout the day.
+                  <strong className="text-foreground">Secure entry:</strong> Controlled access and check-in systems.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">Healthy routines and cleanliness:</strong> Daily 
-                  health checks, regular cleaning protocols, and age-appropriate hygiene practices keep 
-                  children healthy and safe.
+                  <strong className="text-foreground">Health protocols:</strong> Daily checks and regular cleaning.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">Background checks and ongoing training:</strong> All 
-                  staff undergo thorough background checks and receive continuous training in child 
-                  development, safety, and best practices.
+                  <strong className="text-foreground">Trained staff:</strong> Background-checked, ongoing training.
                 </span>
               </li>
               <li className="flex items-start gap-3">
                 <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
                 <span className="text-muted-foreground">
-                  <strong className="text-foreground">Faithful, Christ-following staff:</strong> Our 
-                  teachers and caregivers model Jesus' love through their daily interactions—showing 
-                  patience, kindness, and genuine care for each child.
+                  <strong className="text-foreground">Christ-following teachers:</strong> Model love, patience, and kindness.
                 </span>
               </li>
             </ul>
@@ -318,27 +290,27 @@ export default function HomePage() {
           {/* Right: Testimonials */}
           <div>
             <h2 className="mb-6 text-3xl font-bold text-foreground">What families say</h2>
-            <div className="space-y-6">
+            <div className="space-y-4">
               {[
               {
-                quote: "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care, and we see biblical values being taught every day. As a Christian family, we appreciate the faith integration, but we also know families of all backgrounds feel welcome here.",
+                quote: "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care.",
                 author: "Sarah M.",
                 details: "Mom of a 3-year-old in Plano, TX",
               },
               {
-                quote: "The quality of care is exceptional, and our son has grown so much socially and academically. We're grateful for the biblical foundations being woven into everything. The communication from teachers is excellent, and we feel like true partners in our child's development.",
+                quote: "The quality of care is exceptional. Our son has grown so much socially and academically.",
                 author: "Michael T.",
                 details: "Dad of a 4-year-old in Arlington, TX",
               },
               {
-                quote: "As working parents, we needed somewhere we could trust completely. Lionheart has exceeded our expectations in every way—quality, safety, and faith integration. Our daughter loves going to 'school' and comes home talking about Bible stories and showing us what she learned.",
+                quote: "Lionheart exceeded our expectations—quality, safety, and faith integration. Our daughter loves going to 'school'.",
                 author: "Jennifer L.",
                 details: "Mom of twins, 2 years old, in McKinney, TX",
               },
               ].map((testimonial, index) => (
                 <Card key={index}>
                   <CardContent className="pt-6">
-                    <div className="mb-4 flex gap-1">
+                    <div className="mb-3 flex gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
@@ -346,12 +318,12 @@ export default function HomePage() {
                         />
                       ))}
                     </div>
-                    <p className="mb-4 text-muted-foreground italic">
+                    <p className="mb-3 text-sm text-muted-foreground italic max-w-[65ch]">
                       "{testimonial.quote}"
                     </p>
                     <div>
-                      <p className="font-semibold text-foreground">{testimonial.author}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.details}</p>
+                      <p className="font-semibold text-sm text-foreground">{testimonial.author}</p>
+                      <p className="text-xs text-muted-foreground">{testimonial.details}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -423,30 +395,14 @@ export default function HomePage() {
       {/* 8. FAITHFUL LEARNING & CURRICULUM */}
       <section aria-label="Learning rooted in God's love">
         <div className="mb-8">
-          <h2 className="mb-6 text-3xl font-bold text-foreground">
+          <h2 className="mb-4 text-3xl font-bold text-foreground">
             Learning rooted in God's love
           </h2>
-          <div className="space-y-4 text-muted-foreground">
-            <p>
-              At Lionheart Children's Academy, we integrate a Christ-centered worldview into everything 
-              we do. This means age-appropriate Bible stories, simple worship songs, and daily prayers 
-              that help children understand God's love for them. But it also means teaching kindness, 
-              empathy, and character as natural expressions of faith—values that benefit all children, 
-              regardless of their family's background.
-            </p>
-            <p>
-              Our early learning curriculum is strong and research-based. We focus on language development, 
-              early math concepts, social-emotional skills, and school readiness. Children learn through 
-              play, hands-on activities, and intentional instruction that sparks curiosity and builds 
-              confidence. We prepare your child academically while also nurturing their heart and character.
-            </p>
-            <p>
-              Whole-child development is our goal. We believe children thrive when their mind, body, and 
-              spirit are all nurtured. That's why we integrate physical activity, creative expression, 
-              academic learning, and spiritual growth into each day. Your child will leave Lionheart 
-              prepared for school success and equipped with values that will serve them throughout life.
-            </p>
-          </div>
+          <p className="mb-6 max-w-[65ch] text-muted-foreground">
+            We integrate a Christ-centered worldview with strong early learning. Age-appropriate Bible stories, 
+            research-based curriculum, and whole-child development prepare your child for school success 
+            while nurturing their heart and character.
+          </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {[
@@ -484,8 +440,8 @@ export default function HomePage() {
       <section aria-label="Resources for your family">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">Resources for your family</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Helpful tips and resources to support you on your parenting journey.
+          <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
+            Helpful tips and resources to support your parenting journey.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -527,21 +483,30 @@ export default function HomePage() {
 
       {/* 10. BOTTOM CTA + TOUR FORM */}
       <section id="tour-form" aria-label="Schedule a tour">
-        <div className="rounded-lg bg-primary/5 p-8 md:p-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-              Ready to see Lionheart in person?
-            </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              Schedule a tour to see our classrooms, meet our teachers, and experience the Lionheart 
-              difference firsthand. We're here to answer your questions and help you find the perfect 
-              fit for your family.
-            </p>
-            <div className="rounded-lg bg-background p-6 shadow-sm">
-              <HomeTourForm />
+        <Card className="border-2">
+          <CardContent className="p-8 md:p-12">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+                Ready to see Lionheart in person?
+              </h2>
+              <p className="mb-8 text-lg text-muted-foreground max-w-[65ch] mx-auto">
+                Schedule a tour to see our classrooms, meet our teachers, and experience the Lionheart 
+                difference firsthand.
+              </p>
+              <div className="rounded-lg bg-background border p-6 shadow-sm">
+                <HomeTourForm />
+              </div>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
+                <Button asChild variant="outline">
+                  <Link href="/locations">Find a location →</Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/programs">Explore programs →</Link>
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
       </section>
     </main>
   );
