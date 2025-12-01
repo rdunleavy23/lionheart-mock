@@ -11,6 +11,12 @@ import {
   Users,
   Sparkles,
   Star,
+  Baby,
+  GraduationCap,
+  SmilePlus,
+  Flower2,
+  Target,
+  PlayCircle,
 } from "lucide-react";
 import { HomeLocationSearch } from "@/components/home-location-search";
 import { HomeTourForm } from "@/components/home-tour-form";
@@ -25,8 +31,10 @@ export default function HomePage() {
         <div className="grid gap-8 md:grid-cols-2 md:gap-10 md:items-center">
           {/* Left: Headline, Copy, CTAs, Trust Bar */}
           <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Quality childcare rooted in Christ's love.
+            <h1 className="relative text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+              <span className="relative z-10">Quality childcare rooted in Christ's love.</span>
+              {/* Decorative organic shape */}
+              <div className="absolute -left-4 -top-2 h-8 w-8 rounded-full bg-primary/20 blur-xl md:h-12 md:w-12" />
             </h1>
             <p className="text-lg text-muted-foreground sm:text-xl leading-relaxed max-w-[65ch]">
               A safe, joyful place where children are known, loved, and equipped to thrive. 
@@ -363,10 +371,14 @@ export default function HomePage() {
         </BentoGrid>
       </section>
 
-      {/* 7. VISUAL PROOF OF ENVIRONMENT - Bento Grid */}
+      {/* 7. VISUAL PROOF OF ENVIRONMENT - Bento Grid with Abstract Elements */}
       <section aria-label="See our classrooms">
         <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">See our classrooms</h2>
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <SmilePlus className="h-6 w-6 text-primary" />
+            <h2 className="text-3xl font-bold text-foreground">See our classrooms</h2>
+            <SmilePlus className="h-6 w-6 text-primary" />
+          </div>
           <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
             Warm, inviting learning environments where children explore, create, and grow.
           </p>
@@ -374,11 +386,13 @@ export default function HomePage() {
         <BentoGrid>
           {/* Mix of sizes for visual interest - one large, rest medium */}
           <BentoBox size="large">
-            <Card className="h-full overflow-hidden border-2">
-              <div className="group relative aspect-[4/3] overflow-hidden bg-muted">
+            <Card className="h-full overflow-hidden border-2 relative group">
+              {/* Decorative pattern overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 opacity-50" />
+              <div className="group relative aspect-[4/3] overflow-hidden bg-muted z-10">
                 <div className="flex h-full items-center justify-center">
                   <div className="text-center">
-                    <Users className="mx-auto mb-2 h-16 w-16 text-muted-foreground" />
+                    <Users className="mx-auto mb-2 h-16 w-16 text-muted-foreground group-hover:scale-110 transition-transform" />
                     <span className="block text-sm font-medium text-muted-foreground">
                       Infant classroom
                     </span>
@@ -395,6 +409,12 @@ export default function HomePage() {
                   className="object-cover transition-transform group-hover:scale-105"
                 /> */}
               </div>
+              {/* CTA overlay on hover */}
+              <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Button size="sm" variant="secondary" asChild>
+                  <Link href="/locations">Schedule Tour</Link>
+                </Button>
+              </div>
             </Card>
           </BentoBox>
           
@@ -403,65 +423,87 @@ export default function HomePage() {
               name: "Toddler play area",
               description: "Creative exploration",
               alt: "Toddler play area at Lionheart Children's Academy",
+              icon: PlayCircle,
             },
             {
               name: "Circle time",
               description: "Story time and learning",
               alt: "Circle time at Lionheart Children's Academy",
+              icon: BookOpen,
             },
             {
               name: "Outdoor playground",
               description: "Safe outdoor play",
               alt: "Outdoor playground at Lionheart Children's Academy",
+              icon: Flower2,
             },
-          ].map((image, index) => (
-            <BentoBox key={index} size="medium">
-              <Card className="h-full overflow-hidden">
-                <div className="group relative aspect-[4/3] overflow-hidden bg-muted">
-                  <div className="flex h-full items-center justify-center">
-                    <div className="text-center">
-                      <Users className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-                      <span className="block text-xs font-medium text-muted-foreground">
-                        {image.name}
-                      </span>
+          ].map((image, index) => {
+            const Icon = image.icon;
+            return (
+              <BentoBox key={index} size="medium">
+                <Card className="h-full overflow-hidden relative group">
+                  {/* Subtle pattern background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${
+                    index === 0 ? 'from-primary/5 to-transparent' :
+                    index === 1 ? 'from-accent/5 to-transparent' :
+                    'from-secondary/5 to-transparent'
+                  } opacity-30`} />
+                  <div className="group relative aspect-[4/3] overflow-hidden bg-muted z-10">
+                    <div className="flex h-full items-center justify-center">
+                      <div className="text-center">
+                        <Icon className="mx-auto mb-2 h-12 w-12 text-muted-foreground group-hover:scale-110 transition-transform" />
+                        <span className="block text-xs font-medium text-muted-foreground">
+                          {image.name}
+                        </span>
+                      </div>
                     </div>
+                    {/* In production, replace with: */}
+                    {/* <Image
+                      src={`/gallery/${index + 2}.jpg`}
+                      alt={image.alt}
+                      fill
+                      className="object-cover transition-transform group-hover:scale-105"
+                    /> */}
                   </div>
-                  {/* In production, replace with: */}
-                  {/* <Image
-                    src={`/gallery/${index + 2}.jpg`}
-                    alt={image.alt}
-                    fill
-                    className="object-cover transition-transform group-hover:scale-105"
-                  /> */}
-                </div>
-                <CardContent className="p-4">
-                  <p className="text-sm text-muted-foreground">{image.description}</p>
-                </CardContent>
-              </Card>
-            </BentoBox>
-          ))}
+                  <CardContent className="p-4 relative z-10">
+                    <p className="text-sm text-muted-foreground">{image.description}</p>
+                  </CardContent>
+                </Card>
+              </BentoBox>
+            );
+          })}
         </BentoGrid>
       </section>
 
       {/* 8. FAITHFUL LEARNING & CURRICULUM - Bento Grid */}
       <section aria-label="Learning rooted in God's love">
-        <div className="mb-8">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">
-            Learning rooted in God's love
-          </h2>
-          <p className="mb-6 max-w-[65ch] text-muted-foreground">
+        <div className="mb-8 text-center">
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <h2 className="text-3xl font-bold text-foreground">
+              Learning rooted in God's love
+            </h2>
+            <Sparkles className="h-6 w-6 text-primary" />
+          </div>
+          <p className="mb-6 max-w-[65ch] mx-auto text-muted-foreground text-center">
             We integrate a Christ-centered worldview with strong early learning. Age-appropriate Bible stories, 
             research-based curriculum, and whole-child development prepare your child for school success.
           </p>
         </div>
         <BentoGrid>
-          {/* Wide intro box */}
+          {/* Wide intro box with visual element */}
           <BentoBox size="wide">
-            <Card className="h-full bg-primary/5 border-primary/20">
-              <CardContent className="pt-6">
-                <h3 className="mb-3 text-xl font-semibold text-foreground">
-                  Whole-child development
-                </h3>
+            <Card className="h-full bg-primary/5 border-primary/20 relative overflow-hidden">
+              {/* Multiple decorative blobs for depth */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl" />
+              <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/10 rounded-full -ml-12 -mb-12 blur-xl" />
+              <CardContent className="pt-6 relative">
+                <div className="mb-3 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary animate-pulse" />
+                  <h3 className="text-xl font-semibold text-foreground">
+                    Whole-child development
+                  </h3>
+                </div>
                 <p className="text-sm text-muted-foreground">
                   We nurture academic growth, physical development, social skills, emotional intelligence, 
                   and character formation. Your child will grow in every area—prepared for school and equipped for life.
@@ -470,19 +512,21 @@ export default function HomePage() {
             </Card>
           </BentoBox>
           
-          {/* Medium curriculum cards */}
+          {/* Medium curriculum cards with varied styling */}
           {[
             {
               title: "Christ-centered environment",
               description: "Age-appropriate Bible stories, worship, and prayer help children understand God's love naturally.",
+              bg: "bg-primary/5 border-primary/20",
             },
             {
               title: "Strong early learning",
               description: "Research-based approaches to literacy, math, and social studies prepare children for kindergarten success.",
+              bg: "",
             },
           ].map((item, index) => (
             <BentoBox key={index} size="medium">
-              <Card className="h-full">
+              <Card className={`h-full ${item.bg}`}>
                 <CardHeader>
                   <CardTitle className="text-lg">{item.title}</CardTitle>
                 </CardHeader>
@@ -500,10 +544,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. PARENT RESOURCES / BLOG TEASER - Bento Grid */}
+      {/* 9. PARENT RESOURCES / BLOG TEASER - Bento Grid with Abstract Patterns */}
       <section aria-label="Resources for your family">
         <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">Resources for your family</h2>
+          <div className="mb-4 flex items-center justify-center gap-2">
+            <BookOpen className="h-6 w-6 text-primary" />
+            <h2 className="text-3xl font-bold text-foreground">Resources for your family</h2>
+            <BookOpen className="h-6 w-6 text-primary" />
+          </div>
           <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
             Helpful tips and resources to support your parenting journey.
           </p>
@@ -514,30 +562,38 @@ export default function HomePage() {
               title: "Helping your child with the first day",
               description: "Practical tips to ease the transition and make your child's first day positive.",
               href: "/resources/first-day",
+              pattern: "bg-gradient-to-br from-primary/10 via-accent/5 to-transparent",
             },
             {
               title: "Raising kind kids",
               description: "Simple ways to teach kindness, empathy, and character in everyday moments.",
               href: "/resources/kindness",
+              pattern: "bg-gradient-to-br from-accent/10 via-primary/5 to-transparent",
             },
             {
               title: "Bedtime routines that work",
               description: "How to create consistent sleep schedules that support your child's development.",
               href: "/resources/bedtime",
+              pattern: "bg-gradient-to-br from-secondary/10 via-accent/5 to-transparent",
             },
-          ].map((resource) => (
+          ].map((resource, index) => (
             <BentoBox key={resource.href} size="medium">
-              <Card className="h-full flex flex-col">
-                <CardHeader>
-                  <CardTitle className="text-lg">{resource.title}</CardTitle>
+              <Card className={`h-full flex flex-col relative overflow-hidden ${resource.pattern}`}>
+                {/* Decorative corner blob */}
+                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl -mr-12 -mt-12" />
+                <CardHeader className="relative">
+                  <div className="mb-2 flex items-center gap-2">
+                    <Target className="h-4 w-4 text-primary" />
+                    <CardTitle className="text-lg">{resource.title}</CardTitle>
+                  </div>
                 </CardHeader>
-                <CardContent className="flex-grow">
+                <CardContent className="flex-grow relative">
                   <CardDescription className="text-sm">
                     {resource.description}
                   </CardDescription>
                 </CardContent>
-                <CardFooter>
-                  <Button asChild variant="link" className="p-0">
+                <CardFooter className="relative">
+                  <Button asChild variant="link" className="p-0 font-semibold">
                     <Link href={resource.href}>Read more →</Link>
                   </Button>
                 </CardFooter>
@@ -547,27 +603,33 @@ export default function HomePage() {
         </BentoGrid>
       </section>
 
-      {/* 10. BOTTOM CTA + TOUR FORM */}
+      {/* 10. BOTTOM CTA + TOUR FORM - Enhanced with Playful Elements */}
       <section id="tour-form" aria-label="Schedule a tour">
-        <Card className="border-2">
-          <CardContent className="p-8 md:p-12">
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-                Ready to see Lionheart in person?
-              </h2>
-              <p className="mb-8 text-lg text-muted-foreground max-w-[65ch] mx-auto">
-                Schedule a tour to see our classrooms, meet our teachers, and experience the Lionheart 
-                difference firsthand.
+        <Card className="border-2 relative overflow-hidden">
+          {/* Decorative background elements */}
+          <div className="absolute top-0 left-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl -ml-16 -mt-16" />
+          <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-accent/10 blur-3xl -mr-20 -mb-20" />
+          <CardContent className="p-8 md:p-12 relative">
+            <div className="mx-auto max-w-2xl text-center">
+              <div className="mb-4 flex items-center justify-center gap-3">
+                <Heart className="h-6 w-6 text-primary" />
+                <h2 className="text-3xl font-bold text-foreground">
+                  Ready to visit a Lionheart center?
+                </h2>
+                <Heart className="h-6 w-6 text-primary" />
+              </div>
+              <p className="mb-8 text-lg text-muted-foreground">
+                Schedule a tour to see our classrooms, meet our teachers, and experience our warm, welcoming environment.
               </p>
-              <div className="rounded-lg bg-background border p-6 shadow-sm">
+              <div className="mb-6 rounded-lg bg-primary/5 p-6 border border-primary/20">
                 <HomeTourForm />
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button asChild variant="outline">
-                  <Link href="/locations">Find a location →</Link>
+                <Button asChild variant="outline" size="lg" className="font-semibold">
+                  <Link href="#location-search">Find a location</Link>
                 </Button>
-                <Button asChild variant="outline">
-                  <Link href="/programs">Explore programs →</Link>
+                <Button asChild variant="outline" size="lg" className="font-semibold">
+                  <Link href="/programs">Explore programs</Link>
                 </Button>
               </div>
             </div>
