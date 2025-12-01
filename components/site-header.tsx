@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,11 +37,19 @@ export function SiteHeader() {
         {/* Logo/Brand */}
         <Link
           href="/"
-          className="flex items-center space-x-2 text-xl font-bold text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-          aria-label="Lionheart Childcare Home"
+          className="flex items-center transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label="Lionheart Children's Academy Home"
         >
-          <span className="font-serif">Lionheart</span>
-          <span className="text-muted-foreground">Childcare</span>
+          <div className="relative flex h-10 items-center rounded-md bg-black px-3 py-2">
+            <Image
+              src="/lionheart-logo.png"
+              alt="Lionheart Children's Academy"
+              width={160}
+              height={32}
+              className="h-full w-auto object-contain"
+              priority
+            />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
@@ -82,10 +91,17 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <SheetHeader>
-              <SheetTitle className="text-left text-xl font-bold">
-                <span className="font-serif">Lionheart</span>{" "}
-                <span className="text-muted-foreground">Children's Academy</span>
-              </SheetTitle>
+              <div className="flex items-center">
+                <div className="relative flex h-8 items-center rounded-md bg-black px-2 py-1.5">
+                  <Image
+                    src="/lionheart-logo.png"
+                    alt="Lionheart Children's Academy"
+                    width={120}
+                    height={24}
+                    className="h-full w-auto object-contain"
+                  />
+                </div>
+              </div>
             </SheetHeader>
             <nav className="mt-8 flex flex-col space-y-4" aria-label="Mobile navigation">
               {navItems.map((item) => (

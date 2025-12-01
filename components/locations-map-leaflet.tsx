@@ -121,9 +121,10 @@ export function LocationsMapLeaflet({
       <Card className="overflow-hidden border shadow-md">
         <div
           ref={mapRef}
-          className="relative min-h-[60vh] w-full md:min-h-[70vh] md:sticky md:top-20"
+          className="relative h-[60vh] w-full md:h-[70vh] md:sticky md:top-20"
         >
           <MapContainer
+            key={`map-${selectedLocation.slug}-${mapCenter[0]}-${mapCenter[1]}-${mapZoom}`}
             center={mapCenter}
             zoom={mapZoom}
             style={{ height: "100%", width: "100%", zIndex: 0 }}
