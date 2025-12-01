@@ -15,6 +15,7 @@ import {
 import { HomeLocationSearch } from "@/components/home-location-search";
 import { HomeTourForm } from "@/components/home-tour-form";
 import { programs } from "@/lib/programs-data";
+import { BentoGrid, BentoBox } from "@/components/bento-grid";
 
 export default function HomePage() {
   return (
@@ -99,7 +100,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. WHY LIONHEART */}
+      {/* 3. WHY LIONHEART - Bento Grid */}
       <section aria-label="Why families choose Lionheart">
         <div className="mb-8">
           <h2 className="mb-4 text-3xl font-bold text-foreground">
@@ -110,67 +111,92 @@ export default function HomePage() {
             foundations, creating a safe, loving environment where children thrive.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Heart className="h-6 w-6" />
-              </div>
-              <CardTitle>Rooted in Christ's love</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Every interaction is guided by biblical values of love, kindness, and respect. Your child 
-                will experience genuine care that reflects Christ's love.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              <CardTitle>Exceptional teachers & curriculum</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Our trained educators use research-based early learning approaches that prepare children 
-                for kindergarten success while nurturing their natural curiosity.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Shield className="h-6 w-6" />
-              </div>
-              <CardTitle>Safe, secure environments</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Licensed and accredited centers with secure entry systems, health protocols, and 
-                background-checked staff give you peace of mind.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Users className="h-6 w-6" />
-              </div>
-              <CardTitle>Support for working families</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Flexible schedules, extended hours, and regular communication help busy parents balance 
-                work and family life with confidence.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+        <BentoGrid>
+          {/* Large testimonial box */}
+          <BentoBox size="wide">
+            <Card className="h-full bg-primary/5 border-primary/20">
+              <CardContent className="pt-6">
+                <div className="flex gap-1 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-base italic text-muted-foreground mb-3">
+                  "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care."
+                </p>
+                <p className="text-sm font-semibold text-foreground">— Sarah M., Mom of a 3-year-old</p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          {/* Medium feature cards with varied background colors for visual interest */}
+          <BentoBox size="medium">
+            <Card className="h-full bg-primary/5 border-primary/20">
+              <CardHeader>
+                <div className="mb-3 text-primary">
+                  <Heart className="h-6 w-6" />
+                </div>
+                <CardTitle>Rooted in Christ's love</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Every interaction is guided by biblical values of love, kindness, and respect.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          <BentoBox size="medium">
+            <Card className="h-full bg-accent/10 border-accent/30">
+              <CardHeader>
+                <div className="mb-3 text-accent-foreground">
+                  <BookOpen className="h-6 w-6" />
+                </div>
+                <CardTitle>Exceptional teachers & curriculum</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Research-based early learning approaches that prepare children for kindergarten success.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          <BentoBox size="medium">
+            <Card className="h-full">
+              <CardHeader>
+                <div className="mb-3 text-primary">
+                  <Shield className="h-6 w-6" />
+                </div>
+                <CardTitle>Safe, secure environments</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Licensed and accredited centers with secure entry systems and background-checked staff.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          <BentoBox size="medium">
+            <Card className="h-full bg-secondary/20 border-secondary/40">
+              <CardHeader>
+                <div className="mb-3 text-secondary-foreground">
+                  <Users className="h-6 w-6" />
+                </div>
+                <CardTitle>Support for working families</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Flexible schedules, extended hours, and regular communication for busy parents.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+        </BentoGrid>
       </section>
 
-      {/* 4. PROGRAMS BY AGE */}
+      {/* 4. PROGRAMS BY AGE - Bento Grid */}
       <section aria-label="Programs by age">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">Programs by age</h2>
@@ -178,26 +204,28 @@ export default function HomePage() {
             Age-appropriate programs that nurture development at each stage.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <BentoGrid>
           {programs.map((program) => (
-            <Card key={program.href} className="flex flex-col">
-              <CardHeader>
-                <CardTitle className="text-xl">{program.name}</CardTitle>
-                <CardDescription className="text-base font-medium text-primary">
-                  {program.ageRange}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground">{program.description}</p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href={program.href}>Explore {program.name}</Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <BentoBox key={program.href} size="medium">
+              <Card className="h-full flex flex-col">
+                <CardHeader>
+                  <CardTitle className="text-xl">{program.name}</CardTitle>
+                  <CardDescription className="text-base font-medium text-primary">
+                    {program.ageRange}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <p className="text-sm text-muted-foreground">{program.description}</p>
+                </CardContent>
+                <CardFooter>
+                  <Button asChild variant="outline" className="w-full">
+                    <Link href={program.href}>Explore {program.name}</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </BentoBox>
           ))}
-        </div>
+        </BentoGrid>
       </section>
 
       {/* 5. HOW ENROLLMENT WORKS */}
@@ -246,153 +274,176 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. TRUST, SAFETY, AND SPIRITUAL CARE */}
+      {/* 6. TRUST, SAFETY, AND SPIRITUAL CARE - Bento Grid */}
       <section aria-label="Safety, trust, and spiritual care">
-        <div className="grid gap-12 md:grid-cols-2">
-          {/* Left: Safety & Trust Bullets */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold text-foreground">
-              Safety, trust, and spiritual care
-            </h2>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Licensed & accredited:</strong> Every center meets state requirements.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Secure entry:</strong> Controlled access and check-in systems.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Health protocols:</strong> Daily checks and regular cleaning.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Trained staff:</strong> Background-checked, ongoing training.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Christ-following teachers:</strong> Model love, patience, and kindness.
-                </span>
-              </li>
-            </ul>
-          </div>
-          {/* Right: Testimonials */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold text-foreground">What families say</h2>
-            <div className="space-y-4">
-              {[
-              {
-                quote: "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care.",
-                author: "Sarah M.",
-                details: "Mom of a 3-year-old in Plano, TX",
-              },
-              {
-                quote: "The quality of care is exceptional. Our son has grown so much socially and academically.",
-                author: "Michael T.",
-                details: "Dad of a 4-year-old in Arlington, TX",
-              },
-              {
-                quote: "Lionheart exceeded our expectations—quality, safety, and faith integration. Our daughter loves going to 'school'.",
-                author: "Jennifer L.",
-                details: "Mom of twins, 2 years old, in McKinney, TX",
-              },
-              ].map((testimonial, index) => (
-                <Card key={index}>
-                  <CardContent className="pt-6">
-                    <div className="mb-3 flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
-                    </div>
-                    <p className="mb-3 text-sm text-muted-foreground italic max-w-[65ch]">
-                      "{testimonial.quote}"
-                    </p>
-                    <div>
-                      <p className="font-semibold text-sm text-foreground">{testimonial.author}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.details}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
+        <BentoGrid>
+          {/* Large: Safety & Trust */}
+          <BentoBox size="large">
+            <Card className="h-full">
+              <CardHeader>
+                <CardTitle className="text-2xl">Safety, trust, and spiritual care</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Licensed & accredited:</strong> Every center meets state requirements.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Secure entry:</strong> Controlled access and check-in systems.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Health protocols:</strong> Daily checks and regular cleaning.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Trained staff:</strong> Background-checked, ongoing training.
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
+                    <span className="text-sm text-muted-foreground">
+                      <strong className="text-foreground">Christ-following teachers:</strong> Model love, patience, and kindness.
+                    </span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          {/* Medium: Testimonials */}
+          {[
+            {
+              quote: "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care.",
+              author: "Sarah M.",
+              details: "Mom of a 3-year-old",
+            },
+            {
+              quote: "The quality of care is exceptional. Our son has grown so much socially and academically.",
+              author: "Michael T.",
+              details: "Dad of a 4-year-old",
+            },
+            {
+              quote: "Lionheart exceeded our expectations—quality, safety, and faith integration.",
+              author: "Jennifer L.",
+              details: "Mom of twins",
+            },
+          ].map((testimonial, index) => (
+            <BentoBox key={index} size="medium">
+              <Card className="h-full">
+                <CardContent className="pt-6">
+                  <div className="mb-3 flex gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
+                  </div>
+                  <p className="mb-3 text-sm text-muted-foreground italic">
+                    "{testimonial.quote}"
+                  </p>
+                  <div>
+                    <p className="font-semibold text-sm text-foreground">{testimonial.author}</p>
+                    <p className="text-xs text-muted-foreground">{testimonial.details}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </BentoBox>
+          ))}
+        </BentoGrid>
       </section>
 
-      {/* 7. VISUAL PROOF OF ENVIRONMENT */}
+      {/* 7. VISUAL PROOF OF ENVIRONMENT - Bento Grid */}
       <section aria-label="See our classrooms">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">See our classrooms</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Take a peek inside our warm, inviting learning environments where children explore, create, 
-            and grow.
+          <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
+            Warm, inviting learning environments where children explore, create, and grow.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <BentoGrid>
+          {/* Mix of sizes for visual interest - one large, rest medium */}
+          <BentoBox size="large">
+            <Card className="h-full overflow-hidden border-2">
+              <div className="group relative aspect-[4/3] overflow-hidden bg-muted">
+                <div className="flex h-full items-center justify-center">
+                  <div className="text-center">
+                    <Users className="mx-auto mb-2 h-16 w-16 text-muted-foreground" />
+                    <span className="block text-sm font-medium text-muted-foreground">
+                      Infant classroom
+                    </span>
+                    <span className="mt-1 block text-xs text-muted-foreground/70">
+                      Safe, nurturing spaces
+                    </span>
+                  </div>
+                </div>
+                {/* In production, replace with: */}
+                {/* <Image
+                  src="/gallery/infant-classroom.jpg"
+                  alt="Infant classroom at Lionheart Children's Academy"
+                  fill
+                  className="object-cover transition-transform group-hover:scale-105"
+                /> */}
+              </div>
+            </Card>
+          </BentoBox>
+          
           {[
             {
-              name: "Infant classroom",
-              description: "Safe, nurturing spaces for our youngest learners",
-              alt: "Infant classroom at Lionheart Children's Academy",
-            },
-            {
               name: "Toddler play area",
-              description: "Creative exploration and sensory play",
+              description: "Creative exploration",
               alt: "Toddler play area at Lionheart Children's Academy",
             },
             {
-              name: "Circle time / Bible story",
-              description: "Children gathered for story time and learning",
-              alt: "Circle time with Bible story at Lionheart Children's Academy",
+              name: "Circle time",
+              description: "Story time and learning",
+              alt: "Circle time at Lionheart Children's Academy",
             },
             {
               name: "Outdoor playground",
-              description: "Safe outdoor play and physical development",
+              description: "Safe outdoor play",
               alt: "Outdoor playground at Lionheart Children's Academy",
             },
           ].map((image, index) => (
-            <div
-              key={index}
-              className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-muted shadow-md transition-shadow hover:shadow-lg"
-            >
-              <div className="flex h-full items-center justify-center">
-                <div className="text-center">
-                  <Users className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-                  <span className="block text-sm font-medium text-muted-foreground">
-                    {image.name}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted-foreground/70">
-                    {image.description}
-                  </span>
+            <BentoBox key={index} size="medium">
+              <Card className="h-full overflow-hidden">
+                <div className="group relative aspect-[4/3] overflow-hidden bg-muted">
+                  <div className="flex h-full items-center justify-center">
+                    <div className="text-center">
+                      <Users className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
+                      <span className="block text-xs font-medium text-muted-foreground">
+                        {image.name}
+                      </span>
+                    </div>
+                  </div>
+                  {/* In production, replace with: */}
+                  {/* <Image
+                    src={`/gallery/${index + 2}.jpg`}
+                    alt={image.alt}
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
+                  /> */}
                 </div>
-              </div>
-              {/* In production, replace with: */}
-              {/* <Image
-                src={`/gallery/${index + 1}.jpg`}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-              /> */}
-            </div>
+                <CardContent className="p-4">
+                  <p className="text-sm text-muted-foreground">{image.description}</p>
+                </CardContent>
+              </Card>
+            </BentoBox>
           ))}
-        </div>
+        </BentoGrid>
       </section>
 
-      {/* 8. FAITHFUL LEARNING & CURRICULUM */}
+      {/* 8. FAITHFUL LEARNING & CURRICULUM - Bento Grid */}
       <section aria-label="Learning rooted in God's love">
         <div className="mb-8">
           <h2 className="mb-4 text-3xl font-bold text-foreground">
@@ -400,35 +451,48 @@ export default function HomePage() {
           </h2>
           <p className="mb-6 max-w-[65ch] text-muted-foreground">
             We integrate a Christ-centered worldview with strong early learning. Age-appropriate Bible stories, 
-            research-based curriculum, and whole-child development prepare your child for school success 
-            while nurturing their heart and character.
+            research-based curriculum, and whole-child development prepare your child for school success.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <BentoGrid>
+          {/* Wide intro box */}
+          <BentoBox size="wide">
+            <Card className="h-full bg-primary/5 border-primary/20">
+              <CardContent className="pt-6">
+                <h3 className="mb-3 text-xl font-semibold text-foreground">
+                  Whole-child development
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  We nurture academic growth, physical development, social skills, emotional intelligence, 
+                  and character formation. Your child will grow in every area—prepared for school and equipped for life.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          {/* Medium curriculum cards */}
           {[
             {
               title: "Christ-centered environment",
-              description: "Age-appropriate Bible stories, worship, and prayer help children understand God's love in ways that are natural and engaging. Faith is woven into daily life, not taught as a separate subject.",
+              description: "Age-appropriate Bible stories, worship, and prayer help children understand God's love naturally.",
             },
             {
-              title: "Strong early learning curriculum",
-              description: "Research-based approaches to literacy, math, science, and social studies prepare children for kindergarten success. Our curriculum meets or exceeds state early learning standards.",
-            },
-            {
-              title: "Whole-child development: heart, mind, and character",
-              description: "We nurture academic growth, physical development, social skills, emotional intelligence, and character formation. Your child will grow in every area—prepared for school and equipped for life.",
+              title: "Strong early learning",
+              description: "Research-based approaches to literacy, math, and social studies prepare children for kindergarten success.",
             },
           ].map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-lg">{item.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </CardContent>
-            </Card>
+            <BentoBox key={index} size="medium">
+              <Card className="h-full">
+                <CardHeader>
+                  <CardTitle className="text-lg">{item.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                </CardContent>
+              </Card>
+            </BentoBox>
           ))}
-        </div>
+        </BentoGrid>
         <div className="mt-8 text-center">
           <Button asChild size="lg">
             <Link href="/curriculum">Learn more about our curriculum</Link>
@@ -436,7 +500,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. PARENT RESOURCES / BLOG TEASER */}
+      {/* 9. PARENT RESOURCES / BLOG TEASER - Bento Grid */}
       <section aria-label="Resources for your family">
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">Resources for your family</h2>
@@ -444,41 +508,43 @@ export default function HomePage() {
             Helpful tips and resources to support your parenting journey.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <BentoGrid>
           {[
             {
-              title: "Helping your child with the first day of childcare",
-              description: "Practical tips to ease the transition and make your child's first day a positive experience. Learn how to prepare your child (and yourself) for this important milestone.",
+              title: "Helping your child with the first day",
+              description: "Practical tips to ease the transition and make your child's first day positive.",
               href: "/resources/first-day",
             },
             {
-              title: "Raising kind kids in a busy world",
-              description: "Simple ways to teach kindness, empathy, and character in everyday moments. Biblical values made practical for busy families.",
+              title: "Raising kind kids",
+              description: "Simple ways to teach kindness, empathy, and character in everyday moments.",
               href: "/resources/kindness",
             },
             {
-              title: "Bedtime routines that actually work",
-              description: "How to create consistent sleep schedules that support your child's development and well-being. Real strategies from parents who've been there.",
+              title: "Bedtime routines that work",
+              description: "How to create consistent sleep schedules that support your child's development.",
               href: "/resources/bedtime",
             },
           ].map((resource) => (
-            <Card key={resource.href} className="flex flex-col">
-              <CardHeader>
-                <CardTitle className="text-lg">{resource.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription className="text-base">
-                  {resource.description}
-                </CardDescription>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="link" className="p-0">
-                  <Link href={resource.href}>Read more →</Link>
-                </Button>
-              </CardFooter>
-            </Card>
+            <BentoBox key={resource.href} size="medium">
+              <Card className="h-full flex flex-col">
+                <CardHeader>
+                  <CardTitle className="text-lg">{resource.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <CardDescription className="text-sm">
+                    {resource.description}
+                  </CardDescription>
+                </CardContent>
+                <CardFooter>
+                  <Button asChild variant="link" className="p-0">
+                    <Link href={resource.href}>Read more →</Link>
+                  </Button>
+                </CardFooter>
+              </Card>
+            </BentoBox>
           ))}
-        </div>
+        </BentoGrid>
       </section>
 
       {/* 10. BOTTOM CTA + TOUR FORM */}
