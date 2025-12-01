@@ -475,35 +475,32 @@ export default function HomePage() {
         </BentoGrid>
       </section>
 
-      {/* 8. FAITHFUL LEARNING & CURRICULUM - Bento Grid */}
+      {/* 8. FAITHFUL LEARNING & CURRICULUM - Fixed Layout & Colors */}
       <section aria-label="Learning rooted in God's love">
-        <div className="mb-8 text-center">
-          <div className="mb-4 flex items-center justify-center gap-2">
+        <div className="mb-6 text-center">
+          <div className="mb-3 flex items-center justify-center gap-2">
             <Sparkles className="h-6 w-6 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">
               Learning rooted in God's love
             </h2>
             <Sparkles className="h-6 w-6 text-primary" />
           </div>
-          <p className="mb-6 max-w-[65ch] mx-auto text-muted-foreground text-center">
+          <p className="mb-6 max-w-[65ch] mx-auto text-base text-muted-foreground">
             We integrate a Christ-centered worldview with strong early learning. Age-appropriate Bible stories, 
             research-based curriculum, and whole-child development prepare your child for school success.
           </p>
         </div>
         <BentoGrid>
-          {/* Wide intro box with visual element */}
-          <BentoBox size="wide">
-            <Card className="h-full bg-primary/5 border-primary/20 relative overflow-hidden">
-              {/* Multiple decorative blobs for depth */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl" />
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-accent/10 rounded-full -ml-12 -mb-12 blur-xl" />
-              <CardContent className="pt-6 relative">
-                <div className="mb-3 flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-primary animate-pulse" />
-                  <h3 className="text-xl font-semibold text-foreground">
-                    Whole-child development
-                  </h3>
+          {/* Balanced 3-column layout instead of L-shape */}
+          <BentoBox size="medium">
+            <Card className="h-full bg-primary/10 border-2 border-primary/30">
+              <CardHeader>
+                <div className="mb-2 flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  <CardTitle className="text-lg">Whole-child development</CardTitle>
                 </div>
+              </CardHeader>
+              <CardContent>
                 <p className="text-sm text-muted-foreground">
                   We nurture academic growth, physical development, social skills, emotional intelligence, 
                   and character formation. Your child will grow in every area—prepared for school and equipped for life.
@@ -512,47 +509,48 @@ export default function HomePage() {
             </Card>
           </BentoBox>
           
-          {/* Medium curriculum cards with varied styling */}
-          {[
-            {
-              title: "Christ-centered environment",
-              description: "Age-appropriate Bible stories, worship, and prayer help children understand God's love naturally.",
-              bg: "bg-primary/5 border-primary/20",
-            },
-            {
-              title: "Strong early learning",
-              description: "Research-based approaches to literacy, math, and social studies prepare children for kindergarten success.",
-              bg: "",
-            },
-          ].map((item, index) => (
-            <BentoBox key={index} size="medium">
-              <Card className={`h-full ${item.bg}`}>
-                <CardHeader>
-                  <CardTitle className="text-lg">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </CardContent>
-              </Card>
-            </BentoBox>
-          ))}
+          <BentoBox size="medium">
+            <Card className="h-full bg-accent-mid-blue/10 border-2 border-accent-mid-blue/30">
+              <CardHeader>
+                <CardTitle className="text-lg">Christ-centered environment</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Age-appropriate Bible stories, worship, and prayer help children understand God's love naturally.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
+          
+          <BentoBox size="medium">
+            <Card className="h-full bg-primary/10 border-2 border-primary/30">
+              <CardHeader>
+                <CardTitle className="text-lg">Strong early learning</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Research-based approaches to literacy, math, and social studies prepare children for kindergarten success.
+                </p>
+              </CardContent>
+            </Card>
+          </BentoBox>
         </BentoGrid>
-        <div className="mt-8 text-center">
-          <Button asChild size="lg">
+        <div className="mt-6 text-center">
+          <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link href="/curriculum">Learn more about our curriculum</Link>
           </Button>
         </div>
       </section>
 
-      {/* 9. PARENT RESOURCES / BLOG TEASER - Bento Grid with Abstract Patterns */}
+      {/* 9. PARENT RESOURCES - Fixed Colors & Spacing */}
       <section aria-label="Resources for your family">
-        <div className="mb-8 text-center">
-          <div className="mb-4 flex items-center justify-center gap-2">
+        <div className="mb-6 text-center">
+          <div className="mb-3 flex items-center justify-center gap-2">
             <BookOpen className="h-6 w-6 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">Resources for your family</h2>
             <BookOpen className="h-6 w-6 text-primary" />
           </div>
-          <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
+          <p className="mx-auto max-w-[65ch] text-base text-muted-foreground">
             Helpful tips and resources to support your parenting journey.
           </p>
         </div>
@@ -562,38 +560,39 @@ export default function HomePage() {
               title: "Helping your child with the first day",
               description: "Practical tips to ease the transition and make your child's first day positive.",
               href: "/resources/first-day",
-              pattern: "bg-gradient-to-br from-primary/10 via-accent/5 to-transparent",
+              bg: "bg-primary/10",
+              border: "border-primary/30",
             },
             {
               title: "Raising kind kids",
               description: "Simple ways to teach kindness, empathy, and character in everyday moments.",
               href: "/resources/kindness",
-              pattern: "bg-gradient-to-br from-accent/10 via-primary/5 to-transparent",
+              bg: "bg-accent-mid-blue/10",
+              border: "border-accent-mid-blue/30",
             },
             {
               title: "Bedtime routines that work",
               description: "How to create consistent sleep schedules that support your child's development.",
               href: "/resources/bedtime",
-              pattern: "bg-gradient-to-br from-secondary/10 via-accent/5 to-transparent",
+              bg: "bg-primary/10",
+              border: "border-primary/30",
             },
           ].map((resource, index) => (
             <BentoBox key={resource.href} size="medium">
-              <Card className={`h-full flex flex-col relative overflow-hidden ${resource.pattern}`}>
-                {/* Decorative corner blob */}
-                <div className="absolute top-0 right-0 h-24 w-24 rounded-full bg-primary/10 blur-2xl -mr-12 -mt-12" />
-                <CardHeader className="relative">
+              <Card className={`h-full flex flex-col border-2 ${resource.bg} ${resource.border}`}>
+                <CardHeader>
                   <div className="mb-2 flex items-center gap-2">
                     <Target className="h-4 w-4 text-primary" />
                     <CardTitle className="text-lg">{resource.title}</CardTitle>
                   </div>
                 </CardHeader>
-                <CardContent className="flex-grow relative">
+                <CardContent className="flex-grow">
                   <CardDescription className="text-sm">
                     {resource.description}
                   </CardDescription>
                 </CardContent>
-                <CardFooter className="relative">
-                  <Button asChild variant="link" className="p-0 font-semibold">
+                <CardFooter>
+                  <Button asChild variant="link" className="p-0 font-semibold text-primary hover:text-primary/80">
                     <Link href={resource.href}>Read more →</Link>
                   </Button>
                 </CardFooter>
