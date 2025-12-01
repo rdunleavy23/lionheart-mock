@@ -90,21 +90,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 2. FIND A CENTER NEAR YOU */}
+      {/* 2. FIND A CENTER NEAR YOU - Mobile Optimized Core Flow */}
       <section id="location-search" aria-label="Find a center near you">
         <div className="mx-auto max-w-lg">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">
+          <h2 className="mb-3 text-2xl sm:text-3xl font-bold text-foreground">
             Find a Lionheart center near you
           </h2>
-          <p className="mb-6 text-muted-foreground">
-            Use your ZIP code or city to find nearby Lionheart locations. We have centers across 
-            multiple states, each offering the same exceptional care and biblical foundations.
+          <p className="mb-4 sm:mb-6 text-sm sm:text-base text-muted-foreground">
+            Use your ZIP code or city to find nearby Lionheart locations.
           </p>
-          <Card>
-            <CardContent className="pt-6">
-              <HomeLocationSearch />
-            </CardContent>
-          </Card>
+          {/* Mobile: No card wrapper for less visual noise */}
+          <div className="sm:border sm:rounded-lg sm:p-6">
+            <HomeLocationSearch />
+          </div>
         </div>
       </section>
 
@@ -582,32 +580,35 @@ export default function HomePage() {
         </BentoGrid>
       </section>
 
-      {/* 10. BOTTOM CTA + TOUR FORM - Enhanced with Playful Elements */}
+      {/* 10. BOTTOM CTA + TOUR FORM - Mobile Optimized Core Flow */}
       <section id="tour-form" aria-label="Schedule a tour">
         <Card className="border-2 relative overflow-hidden">
-          {/* Decorative background elements */}
-          <div className="absolute top-0 left-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl -ml-16 -mt-16" />
-          <div className="absolute bottom-0 right-0 h-40 w-40 rounded-full bg-accent/10 blur-3xl -mr-20 -mb-20" />
-          <CardContent className="p-8 md:p-12 relative">
-            <div className="mx-auto max-w-2xl text-center">
-              <div className="mb-4 flex items-center justify-center gap-3">
-                <Heart className="h-6 w-6 text-primary" />
-                <h2 className="text-3xl font-bold text-foreground">
+          {/* Decorative background elements - hidden on mobile */}
+          <div className="hidden md:block absolute top-0 left-0 h-32 w-32 rounded-full bg-primary/10 blur-3xl -ml-16 -mt-16" />
+          <div className="hidden md:block absolute bottom-0 right-0 h-40 w-40 rounded-full bg-accent/10 blur-3xl -mr-20 -mb-20" />
+          <CardContent className="p-6 sm:p-8 md:p-12 relative">
+            <div className="mx-auto max-w-2xl">
+              {/* Mobile: Simplified header */}
+              <div className="mb-4 sm:mb-6 text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-2 sm:mb-3">
                   Ready to visit a Lionheart center?
                 </h2>
-                <Heart className="h-6 w-6 text-primary" />
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  Schedule a tour to see our classrooms and meet our teachers.
+                </p>
               </div>
-              <p className="mb-8 text-lg text-muted-foreground">
-                Schedule a tour to see our classrooms, meet our teachers, and experience our warm, welcoming environment.
-              </p>
-              <div className="mb-6 rounded-lg bg-primary/5 p-6 border border-primary/20">
+              
+              {/* Mobile: Form is primary focus, no extra wrapper */}
+              <div className="sm:rounded-lg sm:bg-primary/5 sm:p-6 sm:border sm:border-primary/20">
                 <HomeTourForm />
               </div>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
-                <Button asChild variant="outline" size="lg" className="font-semibold">
+              
+              {/* Mobile: Secondary actions - less prominent */}
+              <div className="mt-4 sm:mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
+                <Button asChild variant="ghost" size="sm" className="text-sm">
                   <Link href="#location-search">Find a location</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="font-semibold">
+                <Button asChild variant="ghost" size="sm" className="text-sm">
                   <Link href="/programs">Explore programs</Link>
                 </Button>
               </div>

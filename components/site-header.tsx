@@ -20,9 +20,15 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 
-const navItems = [
-  { label: "Programs", href: "/programs" },
-  { label: "Locations", href: "/locations" },
+// Core navigation (3-5 items max for mobile)
+const coreNavItems = [
+  { label: "Locations", href: "/locations", priority: "high" },
+  { label: "Programs", href: "/programs", priority: "high" },
+  { label: "Schedule Tour", href: "/#tour-form", priority: "high" },
+];
+
+// Secondary navigation (moved to "More" menu on mobile)
+const secondaryNavItems = [
   { label: "Our Approach", href: "/approach" },
   { label: "About", href: "/about" },
   { label: "Resources", href: "/resources" },
@@ -56,7 +62,7 @@ export function SiteHeader() {
         <nav className="hidden items-center gap-6 md:flex" aria-label="Main navigation">
           <NavigationMenu>
             <NavigationMenuList className="gap-2">
-              {navItems.map((item) => (
+              {[...coreNavItems, ...secondaryNavItems].map((item) => (
                 <NavigationMenuItem key={item.href}>
                   <Link href={item.href} legacyBehavior passHref>
                     <NavigationMenuLink className="group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
@@ -103,24 +109,38 @@ export function SiteHeader() {
                 </div>
               </div>
             </SheetHeader>
-            <nav className="mt-8 flex flex-col space-y-4" aria-label="Mobile navigation">
-              {navItems.map((item) => (
+            <nav className="mt-8 flex flex-col space-y-3" aria-label="Mobile navigation">
+              {/* Core actions - visually dominant, thumb-reachable */}
+              {coreNavItems.map((item) => (
+                <SheetClose key={item.href} asChild>
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={item.label === "Schedule Tour" ? "default" : "outline"}
+                    className="w-full justify-start text-base font-semibold min-h-[52px]"
+                  >
+                    <Link href={item.href}>{item.label}</Link>
+                  </Button>
+                </SheetClose>
+              ))}
+              
+              {/* Divider */}
+              <div className="my-2 border-t border-border" />
+              
+              {/* Secondary navigation - smaller, less prominent */}
+              <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide px-1 mb-2">
+                More
+              </p>
+              {secondaryNavItems.map((item) => (
                 <SheetClose key={item.href} asChild>
                   <Link
                     href={item.href}
-                    className="text-lg font-medium text-foreground transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="text-base text-foreground transition-colors hover:text-primary py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   >
                     {item.label}
                   </Link>
                 </SheetClose>
               ))}
-              <div className="pt-4">
-                <SheetClose asChild>
-                  <Button asChild size="lg" className="w-full font-semibold">
-                    <Link href="/#tour-form">Schedule a Tour</Link>
-                  </Button>
-                </SheetClose>
-              </div>
             </nav>
           </SheetContent>
         </Sheet>

@@ -1,29 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 
-interface GeolocationState {
-  latitude: number | null;
-  longitude: number | null;
-  error: string | null;
-  loading: boolean;
+interface GeolocationPosition {
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
-export function useGeolocation() {
-  const [state, setState] = useState<GeolocationState>({
-    latitude: null,
-    longitude: null,
-    error: null,
-    loading: true,
-  });
+interface GeolocationHookReturn {
+  location: GeolocationPosition | null;
+  loading: boolean;
+  error: string | null;
+  requestLocation: () => void;
+}
 
-  useEffect(() => {
+export function useGeolocation(): GeolocationHookReturn {
+  const [location, setLocation] = useState<GeolocationPosition | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const requestLocation = useCallback(() => {
     if (!navigator.geolocation) {
-      setState((prev) => ({
-        ...prev,
-        error: "Geolocation is not supported by your browser",
-        loading: false,
-      }));
+      setError("Geolocation is not supported by your browser");
+      setLoading(false);
       return;
     }
+
+    setLoading(true);
+    setError(null);
 
     const options = {
       enableHighAccuracy: true,
@@ -33,38 +37,41 @@ export function useGeolocation() {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null,
-          loading: false,
+        setLocation({
+          coords: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          },
         });
+        setLoading(false);
+        setError(null);
       },
-      (error) => {
+      (err) => {
         let errorMessage = "Unable to retrieve your location";
 
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage =
-              "Location access denied. Please enable location permissions.";
+        switch (err.code) {
+          case err.PERMISSION_DENIED:
+            errorMessage = "Location access denied. Please enable location permissions.";
             break;
-          case error.POSITION_UNAVAILABLE:
+          case err.POSITION_UNAVAILABLE:
             errorMessage = "Location information unavailable.";
             break;
-          case error.TIMEOUT:
+          case err.TIMEOUT:
             errorMessage = "Location request timed out.";
             break;
         }
 
-        setState((prev) => ({
-          ...prev,
-          error: errorMessage,
-          loading: false,
-        }));
+        setError(errorMessage);
+        setLoading(false);
       },
       options
     );
   }, []);
 
-  return state;
+  return {
+    location,
+    loading,
+    error,
+    requestLocation,
+  };
 }

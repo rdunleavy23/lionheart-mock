@@ -70,16 +70,17 @@ export function HomeTourForm() {
         </div>
       )}
 
-      <div className="grid gap-5 sm:grid-cols-2">
+      {/* Mobile: Simplified form - only essential fields */}
+      <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="tour-name" className="text-base font-medium">
+          <label htmlFor="tour-name" className="text-sm font-medium text-foreground sr-only">
             Name <span className="text-destructive">*</span>
-          </Label>
+          </label>
           <Input
             id="tour-name"
             name="name"
             type="text"
-            placeholder="Your name"
+            placeholder="Your name *"
             value={formData.name}
             onChange={(e) => {
               setFormData({ ...formData, name: e.target.value });
@@ -90,9 +91,10 @@ export function HomeTourForm() {
             aria-invalid={!!errors.name}
             aria-describedby={errors.name ? "tour-name-error" : undefined}
             className={cn(
-              "h-11 text-base", // Minimum 44px height, 16px font
+              "h-12 text-base sm:h-11", // Larger on mobile (48px)
               errors.name && "border-destructive focus-visible:ring-destructive"
             )}
+            autoComplete="name"
           />
           {errors.name && (
             <p id="tour-name-error" className="text-sm text-destructive flex items-center gap-1.5" role="alert">
@@ -101,15 +103,16 @@ export function HomeTourForm() {
             </p>
           )}
         </div>
+        
         <div className="space-y-2">
-          <Label htmlFor="tour-email" className="text-base font-medium">
+          <label htmlFor="tour-email" className="text-sm font-medium text-foreground sr-only">
             Email <span className="text-destructive">*</span>
-          </Label>
+          </label>
           <Input
             id="tour-email"
             name="email"
             type="email"
-            placeholder="your.email@example.com"
+            placeholder="your.email@example.com *"
             value={formData.email}
             onChange={(e) => {
               setFormData({ ...formData, email: e.target.value });
@@ -120,9 +123,10 @@ export function HomeTourForm() {
             aria-invalid={!!errors.email}
             aria-describedby={errors.email ? "tour-email-error" : undefined}
             className={cn(
-              "h-11 text-base",
+              "h-12 text-base sm:h-11",
               errors.email && "border-destructive focus-visible:ring-destructive"
             )}
+            autoComplete="email"
           />
           {errors.email && (
             <p id="tour-email-error" className="text-sm text-destructive flex items-center gap-1.5" role="alert">
@@ -131,27 +135,35 @@ export function HomeTourForm() {
             </p>
           )}
         </div>
+        
+        {/* Child's age - optional, collapsed by default on mobile */}
+        <details className="group">
+          <summary className="text-sm font-medium text-muted-foreground cursor-pointer list-none">
+            <span className="group-open:hidden">Add child's age (optional)</span>
+            <span className="hidden group-open:inline">Child's age (optional)</span>
+          </summary>
+          <div className="mt-2 space-y-2">
+            <Input
+              id="tour-child-age"
+              name="childAge"
+              type="text"
+              placeholder="e.g., 3 years old"
+              value={formData.childAge}
+              onChange={(e) => setFormData({ ...formData, childAge: e.target.value })}
+              aria-label="Child's age"
+              className="h-12 text-base sm:h-11"
+              autoComplete="off"
+            />
+          </div>
+        </details>
       </div>
-      <div className="space-y-2">
-        <Label htmlFor="tour-child-age" className="text-base font-medium">
-          Child's Age <span className="text-muted-foreground text-sm font-normal">(optional)</span>
-        </Label>
-        <Input
-          id="tour-child-age"
-          name="childAge"
-          type="text"
-          placeholder="e.g., 3 years old"
-          value={formData.childAge}
-          onChange={(e) => setFormData({ ...formData, childAge: e.target.value })}
-          aria-label="Child's age"
-          className="h-11 text-base"
-        />
-      </div>
-      <div className="flex flex-col gap-3 sm:flex-row pt-2">
+      
+      {/* Mobile: Single primary CTA, full-width, thumb-reachable */}
+      <div className="pt-2">
         <Button 
           type="submit" 
           size="lg" 
-          className="flex-1 font-semibold min-h-[48px]"
+          className="w-full font-semibold min-h-[52px] shadow-lg text-base"
           disabled={isSubmitting || isSuccess}
         >
           {isSubmitting ? (
@@ -166,17 +178,19 @@ export function HomeTourForm() {
             </>
           )}
         </Button>
+        
+        {/* Secondary action - less prominent */}
         <Button
           type="button"
-          variant="outline"
-          size="lg"
-          className="flex-1 font-semibold min-h-[48px]"
+          variant="ghost"
+          size="sm"
+          className="w-full mt-2 text-sm text-muted-foreground"
           onClick={() => {
             console.log("Request info clicked");
             alert("Thank you! We'll send you more information soon.");
           }}
         >
-          Request Info
+          Or request more information
         </Button>
       </div>
     </form>

@@ -22,8 +22,8 @@ export default function LocationsPage() {
   const [sortBy, setSortBy] = React.useState<"name" | "distance">("name");
   
   // Geolocation
-  const { latitude, longitude, error: geoError, loading: geoLoading } = useGeolocation();
-  const userLocation = latitude && longitude ? { lat: latitude, lng: longitude } : null;
+  const { location: geoLocation, error: geoError, loading: geoLoading } = useGeolocation();
+  const userLocation = geoLocation?.coords ? { lat: geoLocation.coords.latitude, lng: geoLocation.coords.longitude } : null;
 
   // Filter locations based on search query and state filter
   const filteredLocations = React.useMemo(() => {
