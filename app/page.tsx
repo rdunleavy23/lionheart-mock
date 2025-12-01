@@ -32,7 +32,7 @@ export default function HomePage() {
           {/* Left: Headline, Copy, CTAs, Trust Bar */}
           <div className="space-y-6 sm:space-y-7">
             <h1 className="relative text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              <span className="relative z-10">Top-notch childcare services with a strong foundation for life.</span>
+              <span className="relative z-10">Quality childcare rooted in Christ's love.</span>
               {/* Decorative organic shape */}
               <div className="absolute -left-4 -top-2 h-8 w-8 rounded-full bg-primary/20 blur-xl md:h-12 md:w-12" />
             </h1>

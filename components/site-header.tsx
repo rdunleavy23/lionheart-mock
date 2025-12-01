@@ -44,9 +44,9 @@ export function SiteHeader() {
             <Image
               src="/lionheart-logo.png"
               alt="Lionheart Children's Academy"
-              width={160}
-              height={32}
-              className="h-full w-auto object-contain"
+              width={282}
+              height={91}
+              className="h-8 w-auto object-contain"
               priority
             />
           </div>
@@ -96,9 +96,9 @@ export function SiteHeader() {
                   <Image
                     src="/lionheart-logo.png"
                     alt="Lionheart Children's Academy"
-                    width={120}
-                    height={24}
-                    className="h-full w-auto object-contain"
+                    width={282}
+                    height={91}
+                    className="h-6 w-auto object-contain"
                   />
                 </div>
               </div>
