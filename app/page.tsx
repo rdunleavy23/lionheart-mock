@@ -371,102 +371,77 @@ export default function HomePage() {
         </BentoGrid>
       </section>
 
-      {/* 7. VISUAL PROOF OF ENVIRONMENT - Bento Grid with Abstract Elements */}
+      {/* 7. VISUAL PROOF OF ENVIRONMENT - Fixed Spacing & Colors */}
       <section aria-label="See our classrooms">
-        <div className="mb-8 text-center">
-          <div className="mb-4 flex items-center justify-center gap-2">
+        <div className="mb-6 text-center">
+          <div className="mb-3 flex items-center justify-center gap-2">
             <SmilePlus className="h-6 w-6 text-primary" />
             <h2 className="text-3xl font-bold text-foreground">See our classrooms</h2>
             <SmilePlus className="h-6 w-6 text-primary" />
           </div>
-          <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
+          <p className="mx-auto max-w-[65ch] text-base text-muted-foreground">
             Warm, inviting learning environments where children explore, create, and grow.
           </p>
         </div>
         <BentoGrid>
-          {/* Mix of sizes for visual interest - one large, rest medium */}
-          <BentoBox size="large">
-            <Card className="h-full overflow-hidden border-2 relative group">
-              {/* Decorative pattern overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/10 opacity-50" />
-              <div className="group relative aspect-[4/3] overflow-hidden bg-muted z-10">
-                <div className="flex h-full items-center justify-center">
-                  <div className="text-center">
-                    <Users className="mx-auto mb-2 h-16 w-16 text-muted-foreground group-hover:scale-110 transition-transform" />
-                    <span className="block text-sm font-medium text-muted-foreground">
-                      Infant classroom
-                    </span>
-                    <span className="mt-1 block text-xs text-muted-foreground/70">
-                      Safe, nurturing spaces
-                    </span>
-                  </div>
-                </div>
-                {/* In production, replace with: */}
-                {/* <Image
-                  src="/gallery/infant-classroom.jpg"
-                  alt="Infant classroom at Lionheart Children's Academy"
-                  fill
-                  className="object-cover transition-transform group-hover:scale-105"
-                /> */}
-              </div>
-              {/* CTA overlay on hover */}
-              <div className="absolute bottom-4 right-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button size="sm" variant="secondary" asChild>
-                  <Link href="/locations">Schedule Tour</Link>
-                </Button>
-              </div>
-            </Card>
-          </BentoBox>
-          
           {[
+            {
+              name: "Infant classroom",
+              description: "Safe, nurturing spaces",
+              alt: "Infant classroom at Lionheart Children's Academy",
+              icon: Users,
+              size: "large" as const,
+              bg: "bg-primary/10",
+            },
             {
               name: "Toddler play area",
               description: "Creative exploration",
               alt: "Toddler play area at Lionheart Children's Academy",
               icon: PlayCircle,
+              size: "medium" as const,
+              bg: "bg-accent-mid-blue/10",
             },
             {
               name: "Circle time",
               description: "Story time and learning",
               alt: "Circle time at Lionheart Children's Academy",
               icon: BookOpen,
+              size: "medium" as const,
+              bg: "bg-primary/10",
             },
             {
               name: "Outdoor playground",
               description: "Safe outdoor play",
               alt: "Outdoor playground at Lionheart Children's Academy",
               icon: Flower2,
+              size: "medium" as const,
+              bg: "bg-accent-mid-blue/10",
             },
           ].map((image, index) => {
             const Icon = image.icon;
             return (
-              <BentoBox key={index} size="medium">
-                <Card className="h-full overflow-hidden relative group">
-                  {/* Subtle pattern background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${
-                    index === 0 ? 'from-primary/5 to-transparent' :
-                    index === 1 ? 'from-accent/5 to-transparent' :
-                    'from-secondary/5 to-transparent'
-                  } opacity-30`} />
-                  <div className="group relative aspect-[4/3] overflow-hidden bg-muted z-10">
-                    <div className="flex h-full items-center justify-center">
-                      <div className="text-center">
-                        <Icon className="mx-auto mb-2 h-12 w-12 text-muted-foreground group-hover:scale-110 transition-transform" />
-                        <span className="block text-xs font-medium text-muted-foreground">
-                          {image.name}
-                        </span>
-                      </div>
+              <BentoBox key={index} size={image.size}>
+                <Card className="h-full overflow-hidden border border-border/50 hover:border-primary/50 transition-colors">
+                  <div className={`relative aspect-[4/3] ${image.bg} flex items-center justify-center`}>
+                    <div className="text-center">
+                      <Icon className={`mx-auto mb-3 ${image.size === 'large' ? 'h-16 w-16' : 'h-12 w-12'} text-primary`} />
+                      <span className="block text-sm font-semibold text-foreground">
+                        {image.name}
+                      </span>
                     </div>
                     {/* In production, replace with: */}
                     {/* <Image
-                      src={`/gallery/${index + 2}.jpg`}
+                      src={`/gallery/${index + 1}.jpg`}
                       alt={image.alt}
                       fill
-                      className="object-cover transition-transform group-hover:scale-105"
+                      className="object-cover"
                     /> */}
                   </div>
-                  <CardContent className="p-4 relative z-10">
-                    <p className="text-sm text-muted-foreground">{image.description}</p>
+                  <CardContent className="p-4 space-y-2">
+                    <p className="text-sm text-muted-foreground text-center">{image.description}</p>
+                    <Button asChild size="sm" variant="outline" className="w-full mt-2">
+                      <Link href="/locations">Schedule Tour</Link>
+                    </Button>
                   </CardContent>
                 </Card>
               </BentoBox>
