@@ -26,6 +26,29 @@ const Popup = dynamic(
   { ssr: false }
 );
 
+// Component to update map view when center/zoom changes
+// Must be rendered inside MapContainer to use useMap hook
+const MapUpdater = dynamic(
+  () =>
+    import("react-leaflet").then((mod) => {
+      const { useMap } = mod;
+      return function MapUpdaterComponent({
+        center,
+        zoom,
+      }: {
+        center: [number, number];
+        zoom: number;
+      }) {
+        const map = useMap();
+        React.useEffect(() => {
+          map.setView(center, zoom);
+        }, [center, zoom, map]);
+        return null;
+      };
+    }),
+  { ssr: false }
+);
+
 interface LocationsMapLeafletProps {
   locations: Location[];
   selectedLocation: Location;
@@ -135,6 +158,8 @@ export function LocationsMapLeaflet({
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+
+            <MapUpdater center={mapCenter} zoom={mapZoom} />
 
             {locations.map((location) => {
               const isSelected = selectedLocation.slug === location.slug;
