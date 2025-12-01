@@ -2,8 +2,10 @@ export type Location = {
   slug: string;
   name: string;
   label?: string;
+  shortName?: string; // e.g. "Arvada"
   state: string;
   city: string;
+  neighborhood?: string;
   fullAddress: string;
   latitude: number;
   longitude: number;
@@ -11,6 +13,25 @@ export type Location = {
   phone?: string;
   email?: string;
   distance?: number; // Calculated distance from user
+  hours?: string; // e.g. "Monday - Friday, 7:00 AM - 6:00 PM"
+  ageGroups?: string[]; // e.g. ["infants", "toddlers", "preschool", "pre-k", "kindergarten"]
+  accreditation?: string[]; // e.g. ["State licensed", "NAEYC accredited"]
+  director?: {
+    name: string;
+    role: string;
+    bio: string;
+  };
+  staff?: Array<{
+    name: string;
+    role: string;
+    bio?: string;
+  }>;
+  gallery?: string[]; // image URLs or placeholder strings
+  testimonials?: Array<{
+    quote: string;
+    name: string;
+    childAge: string;
+  }>;
 };
 
 // Real location data - 25 locations across 5 states
@@ -20,11 +41,62 @@ export const locations: Location[] = [
     slug: "arvada",
     name: "Lionheart Children's Academy – Arvada",
     label: "Arvada, CO",
+    shortName: "Arvada",
     state: "Colorado",
     city: "Arvada",
     fullAddress: "8210 Kipling St, Arvada, CO 80005",
     latitude: 39.8403,
     longitude: -105.1264,
+    phone: "(303) 555-0100",
+    email: "arvada@lionheartacademy.com",
+    hours: "Monday - Friday, 7:00 AM - 6:00 PM",
+    ageGroups: ["infants", "toddlers", "preschool", "pre-k", "kindergarten"],
+    accreditation: ["State Licensed", "NAEYC Accredited"],
+    director: {
+      name: "Sarah Johnson",
+      role: "Center Director",
+      bio: "Sarah has been serving families in the Arvada community for over 10 years. She holds a Master's in Early Childhood Education and is passionate about creating nurturing environments where children thrive.",
+    },
+    staff: [
+      {
+        name: "Maria Rodriguez",
+        role: "Lead Preschool Teacher",
+        bio: "Maria brings 8 years of experience and a heart for helping children discover their unique gifts.",
+      },
+      {
+        name: "James Wilson",
+        role: "Infant Care Specialist",
+        bio: "James is certified in infant development and creates safe, loving spaces for our youngest learners.",
+      },
+    ],
+    gallery: [
+      "Arvada infant classroom",
+      "Arvada toddler play area",
+      "Arvada preschool learning center",
+      "Arvada outdoor playground",
+      "Arvada art studio",
+      "Arvada reading nook",
+    ],
+    testimonials: [
+      {
+        quote:
+          "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care, and we see biblical values being taught every day.",
+        name: "Jennifer M.",
+        childAge: "parent of a 3-year-old",
+      },
+      {
+        quote:
+          "The quality of care is exceptional, and our son has grown so much socially and academically. We're grateful for the biblical foundations being woven into everything.",
+        name: "Michael T.",
+        childAge: "parent of a 4-year-old",
+      },
+      {
+        quote:
+          "As working parents, we needed somewhere we could trust completely. Lionheart Arvada has exceeded our expectations in every way—quality, safety, and faith integration.",
+        name: "Lisa K.",
+        childAge: "parent of twins, 2 years old",
+      },
+    ],
   },
   {
     slug: "colorado-springs",
@@ -152,11 +224,36 @@ export const locations: Location[] = [
     slug: "mckinney",
     name: "Lionheart Children's Academy – McKinney",
     label: "McKinney, TX",
+    shortName: "McKinney",
     state: "Texas",
     city: "McKinney",
     fullAddress: "6400 Henneman Way, McKinney, TX 75070",
     latitude: 33.1972,
     longitude: -96.6397,
+    phone: "(972) 555-0102",
+    email: "mckinney@lionheartacademy.com",
+    hours: "Monday - Friday, 7:00 AM - 6:00 PM",
+    ageGroups: ["infants", "toddlers", "preschool", "pre-k", "kindergarten"],
+    accreditation: ["State Licensed", "NAEYC Accredited"],
+    director: {
+      name: "Patricia Martinez",
+      role: "Center Director",
+      bio: "Patricia has dedicated her career to early childhood education, bringing warmth and expertise to every interaction with children and families.",
+    },
+    gallery: [
+      "McKinney infant room",
+      "McKinney preschool classroom",
+      "McKinney playground",
+      "McKinney music room",
+    ],
+    testimonials: [
+      {
+        quote:
+          "We love the McKinney center! Our daughter has flourished here, and we appreciate the biblical values integrated into daily learning.",
+        name: "Robert S.",
+        childAge: "parent of a 3-year-old",
+      },
+    ],
   },
   {
     slug: "plano-central",

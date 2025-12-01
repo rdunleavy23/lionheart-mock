@@ -33,29 +33,6 @@ interface LocationsMapLeafletProps {
   userLocation?: { lat: number; lng: number } | null;
 }
 
-// Component to update map center when location changes
-function MapUpdater({
-  center,
-}: {
-  center: [number, number];
-}) {
-  const MapUpdaterInner = dynamic(
-    () =>
-      import("react-leaflet").then((mod) => {
-        function Inner() {
-          const map = mod.useMap();
-          React.useEffect(() => {
-            map.setView(center, map.getZoom() > 10 ? map.getZoom() : 12);
-          }, [center, map]);
-          return null;
-        }
-        return Inner;
-      }),
-    { ssr: false }
-  );
-  return <MapUpdaterInner />;
-}
-
 export function LocationsMapLeaflet({
   locations,
   selectedLocation,
@@ -76,9 +53,20 @@ export function LocationsMapLeaflet({
     }
   }, [selectedLocation]);
 
-  const center: [number, number] = selectedLocation
-    ? [selectedLocation.latitude, selectedLocation.longitude]
-    : [39.5, -98.35]; // Center of USA
+  // Calculate center to show all locations - default to USA center, zoom to show all states
+  const [mapCenter, setMapCenter] = React.useState<[number, number]>([39.5, -98.35]); // Center of USA
+  const [mapZoom, setMapZoom] = React.useState(4); // Wide zoom to show all states
+
+  // Update center when location selected, but keep zoom wider to show context
+  React.useEffect(() => {
+    if (selectedLocation) {
+      setMapCenter([selectedLocation.latitude, selectedLocation.longitude]);
+      setMapZoom(6); // Zoom in a bit but still show surrounding states
+    } else {
+      setMapCenter([39.5, -98.35]);
+      setMapZoom(4); // Wide view of USA
+    }
+  }, [selectedLocation]);
 
   // Fix for Leaflet marker icons in Next.js
   React.useEffect(() => {
@@ -125,7 +113,7 @@ export function LocationsMapLeaflet({
           Map View
         </h2>
         <p className="text-sm text-muted-foreground">
-          Select a location on the left to see it highlighted on the map.
+          Select a location on the left to see it highlighted on the map. All locations are shown with markers.
         </p>
       </div>
 
@@ -136,8 +124,8 @@ export function LocationsMapLeaflet({
           className="relative min-h-[60vh] w-full md:min-h-[70vh] md:sticky md:top-20"
         >
           <MapContainer
-            center={center}
-            zoom={selectedLocation ? 12 : 4}
+            center={mapCenter}
+            zoom={mapZoom}
             style={{ height: "100%", width: "100%", zIndex: 0 }}
             scrollWheelZoom={true}
             className="rounded-lg"
@@ -146,12 +134,6 @@ export function LocationsMapLeaflet({
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-
-            {selectedLocation && (
-              <MapUpdater
-                center={[selectedLocation.latitude, selectedLocation.longitude]}
-              />
-            )}
 
             {locations.map((location) => {
               const isSelected = selectedLocation.slug === location.slug;
