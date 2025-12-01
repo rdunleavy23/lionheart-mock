@@ -25,18 +25,18 @@ import { BentoGrid, BentoBox } from "@/components/bento-grid";
 
 export default function HomePage() {
   return (
-    <main className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 space-y-12 md:space-y-16">
+    <main className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 md:py-14 space-y-10 sm:space-y-12 md:space-y-16">
       {/* 1. HERO SECTION */}
       <section aria-label="Hero section">
         <div className="grid gap-8 md:grid-cols-2 md:gap-10 md:items-center">
           {/* Left: Headline, Copy, CTAs, Trust Bar */}
-          <div className="space-y-6">
+          <div className="space-y-6 sm:space-y-7">
             <h1 className="relative text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               <span className="relative z-10">Quality childcare rooted in Christ's love.</span>
               {/* Decorative organic shape */}
               <div className="absolute -left-4 -top-2 h-8 w-8 rounded-full bg-primary/20 blur-xl md:h-12 md:w-12" />
             </h1>
-            <p className="text-lg text-muted-foreground sm:text-xl leading-relaxed max-w-[65ch]">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-[65ch]">
               A safe, joyful place where children are known, loved, and equipped to thrive. 
               Exceptional early education with biblical foundations that prepare your child for school success.
             </p>
@@ -49,22 +49,22 @@ export default function HomePage() {
               </Button>
             </div>
             {/* Trust Bar */}
-            <div className="flex flex-wrap gap-3 pt-4">
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Shield className="mr-1.5 h-3.5 w-3.5" />
-                Licensed & accredited
+            <div className="flex flex-wrap gap-2 sm:gap-3 pt-4">
+              <Badge variant="secondary" className="text-sm py-2 px-3 min-h-[36px] flex items-center">
+                <Shield className="mr-1.5 h-3.5 w-3.5 flex-shrink-0" />
+                <span>Licensed & accredited</span>
               </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Heart className="mr-1.5 h-3.5 w-3.5" />
-                Christ-centered care
+              <Badge variant="secondary" className="text-sm py-2 px-3 min-h-[36px] flex items-center">
+                <Heart className="mr-1.5 h-3.5 w-3.5 flex-shrink-0" />
+                <span>Christ-centered care</span>
               </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Users className="mr-1.5 h-3.5 w-3.5" />
-                Loving, trained teachers
+              <Badge variant="secondary" className="text-sm py-2 px-3 min-h-[36px] flex items-center">
+                <Users className="mr-1.5 h-3.5 w-3.5 flex-shrink-0" />
+                <span>Loving, trained teachers</span>
               </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <BookOpen className="mr-1.5 h-3.5 w-3.5" />
-                School readiness focus
+              <Badge variant="secondary" className="text-sm py-2 px-3 min-h-[36px] flex items-center">
+                <BookOpen className="mr-1.5 h-3.5 w-3.5 flex-shrink-0" />
+                <span>School readiness focus</span>
               </Badge>
             </div>
           </div>

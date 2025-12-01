@@ -4,6 +4,49 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Mobile-First UX/UI Best Practices */
+* {
+  /* Improve touch responsiveness */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure minimum 16px base font size for readability */
+html {
+  font-size: 16px; /* Base 16px for mobile readability */
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 18px; /* Slightly larger on desktop */
+  }
+}
+
+/* Optimize text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure proper line height for readability (1.4-1.6 ratio) */
+p, li, span {
+  line-height: 1.6; /* Optimal for readability */
+}
+
+/* Improve focus visibility for accessibility */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth scrolling for better UX */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
