@@ -11,9 +11,9 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "Lionheart Children's Academy | Where Your Child is Safe, Loved & Learning",
+  title: "Lionheart Children's Academy Early Childhood Programs",
   description:
-    "Exceptional early education with biblical foundations. Find peace of mind knowing your child receives the highest quality care while growing in faith. 20+ locations across 5 states. Schedule a tour today.",
+    "Lionheart Children's Academy strives to provide top-notch childcare services. Learn more about our programs, curriculum facilities, and unique approach.",
 };
 
 export default function RootLayout({

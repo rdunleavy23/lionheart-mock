@@ -7,33 +7,27 @@ export type Program = {
 
 export const programs: Program[] = [
   {
-    name: "Infant Care",
-    ageRange: "6 weeks - 12 months",
-    description: "Nurturing care in a safe, loving environment. Your baby will receive individual attention while building trust and security. Our infant program focuses on responsive care, sensory exploration, and creating secure attachments in a faith-infused environment.",
+    name: "Infants",
+    ageRange: "6 weeks - 18 months",
+    description: "Nurturing care where infants are immersed in daily experiences that encourage the development of gross and fine motor skills, as well as language development. Our curriculum includes activities designed to promote growth and the achievement of developmental milestones.",
     href: "/programs/infants",
   },
   {
-    name: "Toddlers",
-    ageRange: "1-2 years",
-    description: "Encouraging exploration and discovery through play-based learning. Building independence while feeling secure and loved. Your toddler will develop language, motor skills, and social connections in a warm, Christ-centered setting.",
+    name: "Toddlers & Twos",
+    ageRange: "18 - 36 months",
+    description: "Environments abundant with opportunities to discover, explore, and experience the world. Our dedicated teaching team focuses on building children's self-esteem by celebrating daily successes and providing support through challenges. Includes Experience Early Learning Curriculum® and First Look Faith-Based Curriculum.",
     href: "/programs/toddlers",
   },
   {
-    name: "Preschool",
-    ageRange: "3-4 years",
-    description: "Social-emotional development and school readiness skills through hands-on activities and biblical character lessons. Your preschooler will build confidence, friendships, and academic foundations while learning about kindness, empathy, and God's love.",
+    name: "Preschool & Pre-K",
+    ageRange: "3 - 5 years",
+    description: "Prepares children for kindergarten by building their skill sets and confidence. Through developmentally appropriate activities, children are encouraged to develop a lifelong love of learning. Focuses on social-emotional, physical, language, and cognitive development.",
     href: "/programs/preschool",
   },
   {
-    name: "Pre-K & Kindergarten Prep",
-    ageRange: "4-5 years",
-    description: "Preparing for kindergarten success with academic foundations, critical thinking, and a love for learning rooted in faith. Your child will develop literacy, math, and social skills while growing in character and confidence.",
-    href: "/programs/pre-k",
-  },
-  {
-    name: "After-school",
-    ageRange: "School-age",
-    description: "Safe, structured after-school environment with homework help, enrichment activities, and character development. Your school-age child will have a supportive place to grow, learn, and build friendships after the school day ends.",
-    href: "/programs/after-school",
+    name: "Trailblazers",
+    ageRange: "K - 12 years",
+    description: "Before and after-school care, plus school break programs. Activities include daily devotions, homework help, large and small group activities, community outreach projects, and playtime. School break programs feature STEAM activities, team building, field trips, and service projects.",
+    href: "/programs/trailblazers",
   },
 ];

@@ -32,13 +32,13 @@ export default function HomePage() {
           {/* Left: Headline, Copy, CTAs, Trust Bar */}
           <div className="space-y-6 sm:space-y-7">
             <h1 className="relative text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              <span className="relative z-10">Quality childcare rooted in Christ's love.</span>
+              <span className="relative z-10">Lionheart Children's Academy Early Childhood Programs</span>
               {/* Decorative organic shape */}
               <div className="absolute -left-4 -top-2 h-8 w-8 rounded-full bg-primary/20 blur-xl md:h-12 md:w-12" />
             </h1>
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-[65ch]">
-              A safe, joyful place where children are known, loved, and equipped to thrive. 
-              Exceptional early education with biblical foundations that prepare your child for school success.
+              Lionheart Children's Academy strives to provide top-notch childcare services. 
+              Our purposeful approach to early child care ensures your child has a strong foundation for life.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="text-base font-semibold">
@@ -209,7 +209,8 @@ export default function HomePage() {
         <div className="mb-8 text-center">
           <h2 className="mb-4 text-3xl font-bold text-foreground">Programs by age</h2>
           <p className="mx-auto max-w-[65ch] text-lg text-muted-foreground">
-            Age-appropriate programs that nurture development at each stage.
+            Our programs are tailored to support the development of children from infancy through school age, 
+            emphasizing a holistic, Christian-centered approach to early childhood education.
           </p>
         </div>
         <BentoGrid>
@@ -461,8 +462,9 @@ export default function HomePage() {
             <Sparkles className="h-6 w-6 text-primary" />
           </div>
           <p className="mb-6 max-w-[65ch] mx-auto text-base text-muted-foreground">
-            We integrate a Christ-centered worldview with strong early learning. Age-appropriate Bible stories, 
-            research-based curriculum, and whole-child development prepare your child for school success.
+            Our holistic approach ensures that children grow academically, socially, emotionally, and spiritually 
+            in a loving and secure setting. We use research-based curricula including Experience Early Learning Curriculum® 
+            and First Look Faith-Based Curriculum to prepare your child for school success.
           </p>
         </div>
         <BentoGrid>
@@ -477,8 +479,9 @@ export default function HomePage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  We nurture academic growth, physical development, social skills, emotional intelligence, 
-                  and character formation. Your child will grow in every area—prepared for school and equipped for life.
+                  We focus on social-emotional, physical, language, and cognitive development. Through developmentally 
+                  appropriate activities, children are encouraged to develop a lifelong love of learning while building 
+                  their skill sets and confidence.
                 </p>
               </CardContent>
             </Card>
@@ -490,9 +493,10 @@ export default function HomePage() {
                 <CardTitle className="text-lg">Christ-centered environment</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Age-appropriate Bible stories, worship, and prayer help children understand God's love naturally.
-                </p>
+                  <p className="text-sm text-muted-foreground">
+                    Our First Look Faith-Based Curriculum integrates biblical values naturally into daily learning, 
+                    helping children understand God's love through age-appropriate Bible stories, worship, and prayer.
+                  </p>
               </CardContent>
             </Card>
           </BentoBox>
@@ -503,9 +507,10 @@ export default function HomePage() {
                 <CardTitle className="text-lg">Strong early learning</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Research-based approaches to literacy, math, and social studies prepare children for kindergarten success.
-                </p>
+                  <p className="text-sm text-muted-foreground">
+                    Our Experience Early Learning Curriculum® uses research-based approaches to literacy, math, and social 
+                    studies, ensuring children are well-prepared for kindergarten and beyond.
+                  </p>
               </CardContent>
             </Card>
           </BentoBox>
