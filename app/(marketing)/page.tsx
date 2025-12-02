@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,537 +11,563 @@ import {
   CheckCircle2,
   MapPin,
   Users,
-  Sparkles,
   Star,
+  ChevronRight,
+  Play,
+  Calendar,
+  Phone,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
-import { HomeLocationSearch } from "@/components/home-location-search";
-import { HomeTourForm } from "@/components/home-tour-form";
 import { programs } from "@/lib/programs-data";
+
+// New best-in-class components
+import { VideoHero, HeroContent } from "@/components/video-hero";
+import { AnimateOnScroll, StaggerContainer, StaggerItem } from "@/components/animate-on-scroll";
+import { StatsCounter, lionheartStats } from "@/components/stats-counter";
+import { TestimonialCarousel, sampleTestimonials, AggregateRating } from "@/components/testimonial-carousel";
+import { StaffSpotlight, placeholderStaff } from "@/components/staff-card";
+import { PlaceholderGallery } from "@/components/photo-gallery";
+import { TrustBadges, heroTrustBadges, SafetyFeatures, AccreditationLogos } from "@/components/trust-badges";
+import { CompactFAQ, lionheartFAQs } from "@/components/faq-section";
+import { ScheduleSelector } from "@/components/daily-schedule";
+import { AvailabilityChecker } from "@/components/availability-checker";
+import { MultiStepTourForm } from "@/components/multi-step-tour-form";
+import { HomeLocationSearch } from "@/components/home-location-search";
 
 export default function HomePage() {
   return (
-    <main className="max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14 space-y-16">
-      {/* 1. HERO SECTION */}
-      <section aria-label="Hero section">
-        <div className="grid gap-8 md:grid-cols-2 md:gap-10 md:items-center">
-          {/* Left: Headline, Copy, CTAs, Trust Bar */}
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Quality childcare rooted in Christ's love.
-            </h1>
-            <p className="text-lg text-muted-foreground sm:text-xl leading-relaxed">
-              A safe, joyful place where children are known, loved, and equipped to thrive—academically, socially, and spiritually. 
-              We welcome families of all backgrounds, offering exceptional early education with biblical foundations that prepare 
-              your child for school success while nurturing their heart and character.
-            </p>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <Button asChild size="lg" className="text-base font-semibold">
-                <Link href="#location-search">Find a location</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="text-base font-semibold">
-                <Link href="#tour-form">Schedule a tour</Link>
-              </Button>
+    <main>
+      {/* 1. VIDEO HERO SECTION */}
+      <VideoHero
+        // videoSrc="/videos/hero.mp4" // Add when video is available
+        // posterSrc="/images/hero-poster.jpg" // Add when image is available
+        fallbackImageSrc=""
+        minHeight="85vh"
+        showControls={false}
+        className="relative"
+      >
+        <HeroContent className="text-center" maxWidth="max-w-5xl">
+          {/* Headline */}
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl xl:text-7xl">
+            Where Your Child is{" "}
+            <span className="text-accent">Safe</span>,{" "}
+            <span className="text-accent">Loved</span> &{" "}
+            <span className="text-accent">Learning</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 sm:text-xl">
+            Exceptional early education with biblical foundations. Find peace of mind 
+            knowing your child receives the highest quality care while growing in faith.
+          </p>
+
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button asChild size="lg" className="text-lg font-semibold px-8 py-6 shadow-lg hover-scale">
+              <Link href="#tour-form">
+                <Calendar className="mr-2 h-5 w-5" />
+                Schedule a Tour
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="text-lg font-semibold px-8 py-6 bg-white/10 text-white border-white/30 hover:bg-white/20 backdrop-blur-sm">
+              <Link href="#location-search">
+                <MapPin className="mr-2 h-5 w-5" />
+                Find a Location
+              </Link>
+            </Button>
+          </div>
+
+          {/* Trust Badges */}
+          <div className="mt-10">
+            <TrustBadges badges={heroTrustBadges} variant="hero" />
+          </div>
+
+          {/* Stats */}
+          <div className="mt-12 rounded-2xl bg-white/10 backdrop-blur-md p-6 md:p-8">
+            <StatsCounter stats={lionheartStats} variant="hero" />
+          </div>
+        </HeroContent>
+      </VideoHero>
+
+      {/* Main Content */}
+      <div className="mx-auto max-w-7xl px-4 md:px-6">
+        {/* 2. SOCIAL PROOF BAR */}
+        <AnimateOnScroll variant="fadeUp" className="py-12 border-b">
+          <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-12">
+            <AggregateRating rating={4.9} totalReviews={312} source="Google Reviews" />
+            <div className="hidden md:block h-8 w-px bg-border" />
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Users className="h-5 w-5 text-primary" />
+              <span><strong className="text-foreground">2,000+</strong> families trust Lionheart</span>
             </div>
-            {/* Trust Bar */}
-            <div className="flex flex-wrap gap-3 pt-4">
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Shield className="mr-1.5 h-3.5 w-3.5" />
-                Licensed & accredited
-              </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Heart className="mr-1.5 h-3.5 w-3.5" />
-                Christ-centered care
-              </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <Users className="mr-1.5 h-3.5 w-3.5" />
-                Loving, trained teachers
-              </Badge>
-              <Badge variant="secondary" className="text-sm py-1.5 px-3">
-                <BookOpen className="mr-1.5 h-3.5 w-3.5" />
-                School readiness focus
-              </Badge>
+            <div className="hidden md:block h-8 w-px bg-border" />
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Sparkles className="h-5 w-5 text-primary" />
+              <span><strong className="text-foreground">15+</strong> years of excellence</span>
             </div>
           </div>
-          {/* Right: Hero Image */}
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-muted">
-            <div className="flex h-full items-center justify-center">
-              <div className="text-center">
-                <Users className="mx-auto mb-2 h-16 w-16 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">
-                  Teacher sitting with a child reading a book
-                </span>
-              </div>
+        </AnimateOnScroll>
+
+        {/* 3. FIND A CENTER NEAR YOU */}
+        <section id="location-search" className="py-16 md:py-20" aria-label="Find a center near you">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="mx-auto max-w-2xl text-center">
+              <Badge variant="secondary" className="mb-4">
+                <MapPin className="mr-1 h-3 w-3" />
+                25+ Locations
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                Find a Lionheart Center Near You
+              </h2>
+              <p className="mt-4 text-lg text-muted-foreground">
+                Use your ZIP code or city to find nearby Lionheart locations. We have centers 
+                across multiple states, each offering the same exceptional care.
+              </p>
             </div>
-            {/* In production, replace with: */}
-            {/* <Image
-              src="/hero-image.jpg"
-              alt="Teacher sitting with a child reading a book"
-              fill
-              className="object-cover"
-              priority
-            /> */}
-          </div>
-        </div>
-      </section>
+          </AnimateOnScroll>
 
-      {/* 2. FIND A CENTER NEAR YOU */}
-      <section id="location-search" aria-label="Find a center near you">
-        <div className="mx-auto max-w-lg">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">
-            Find a Lionheart center near you
-          </h2>
-          <p className="mb-6 text-muted-foreground">
-            Use your ZIP code or city to find nearby Lionheart locations. We have centers across 
-            multiple states, each offering the same exceptional care and biblical foundations.
-          </p>
-          <Card>
-            <CardContent className="pt-6">
-              <HomeLocationSearch />
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* 3. WHY LIONHEART */}
-      <section aria-label="Why families choose Lionheart">
-        <div className="mb-8">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">
-            Why families choose Lionheart
-          </h2>
-          <div className="space-y-4 text-muted-foreground">
-            <p>
-              At Lionheart Children's Academy, we believe every child is uniquely created and deserves 
-              exceptional care. Our Christ-centered approach means your child will experience genuine 
-              love and acceptance, while our high-quality early education curriculum prepares them for 
-              school success. We integrate biblical values naturally—teaching kindness, respect, and 
-              compassion through daily interactions and age-appropriate Bible stories.
-            </p>
-            <p>
-              Safety and security are foundational. Every center is licensed and accredited, with secure 
-              entry systems, background-checked staff, and rigorous health protocols. Our teachers are 
-              trained professionals who genuinely care about your child's development—academically, 
-              socially, and spiritually.
-            </p>
-            <p>
-              We welcome families of all backgrounds. Whether you're actively involved in a church or 
-              simply seeking trustworthy, loving care for your child, you'll find a warm, inclusive 
-              environment where your family belongs. Our faith-forward approach is never exclusive or 
-              harsh—it's simply part of who we are and how we care for children.
-            </p>
-          </div>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Heart className="h-6 w-6" />
-              </div>
-              <CardTitle>Rooted in Christ's love</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Every interaction is guided by biblical values of love, kindness, and respect. Your child 
-                will experience genuine care that reflects Christ's love.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <BookOpen className="h-6 w-6" />
-              </div>
-              <CardTitle>Exceptional teachers & curriculum</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Our trained educators use research-based early learning approaches that prepare children 
-                for kindergarten success while nurturing their natural curiosity.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Shield className="h-6 w-6" />
-              </div>
-              <CardTitle>Safe, secure environments</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Licensed and accredited centers with secure entry systems, health protocols, and 
-                background-checked staff give you peace of mind.
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <div className="mb-3 text-primary">
-                <Users className="h-6 w-6" />
-              </div>
-              <CardTitle>Support for working families</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                Flexible schedules, extended hours, and regular communication help busy parents balance 
-                work and family life with confidence.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* 4. PROGRAMS BY AGE */}
-      <section aria-label="Programs by age">
-        <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">Programs by age</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Every child is unique. Our age-appropriate programs nurture development at each stage, 
-            combining exceptional care with biblical foundations.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program) => (
-            <Card key={program.href} className="flex flex-col">
-              <CardHeader>
-                <CardTitle className="text-xl">{program.name}</CardTitle>
-                <CardDescription className="text-base font-medium text-primary">
-                  {program.ageRange}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <p className="text-muted-foreground">{program.description}</p>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="outline" className="w-full">
-                  <Link href={program.href}>Explore {program.name}</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* 5. HOW ENROLLMENT WORKS */}
-      <section aria-label="How enrollment works">
-        <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">How enrollment works</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Getting started with Lionheart is simple.
-          </p>
-        </div>
-        <div className="grid gap-8 md:grid-cols-3">
-          {[
-            {
-              step: "1",
-              title: "Connect with your local center",
-              description: "Find a Lionheart center near you and reach out to learn about programs, availability, and enrollment options. Our team is ready to answer your questions and help you find the right fit for your family.",
-            },
-            {
-              step: "2",
-              title: "Visit & tour the classrooms",
-              description: "Schedule a tour to see our classrooms, meet our teachers, and experience our warm, welcoming environment firsthand. You'll see how we care for children and integrate faith naturally into daily learning.",
-            },
-            {
-              step: "3",
-              title: "Enroll & prepare for your child's first day",
-              description: "Complete enrollment paperwork and prepare for your child's first day. We'll guide you through every step and help make the transition smooth for both you and your child.",
-            },
-          ].map((item) => (
-            <Card key={item.step} className="text-center">
+          <AnimateOnScroll variant="fadeUp" delay={0.2} className="mt-10">
+            <Card className="mx-auto max-w-xl shadow-lg hover-lift">
               <CardContent className="pt-6">
-                <div className="mb-4 flex justify-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground text-xl font-bold">
-                    {item.step}
-                  </div>
-                </div>
-                <h3 className="mb-2 text-xl font-semibold">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
+                <HomeLocationSearch />
               </CardContent>
             </Card>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Button asChild size="lg" variant="outline">
-            <Link href="/enrollment">Learn about enrollment & tuition</Link>
-          </Button>
-        </div>
-      </section>
+          </AnimateOnScroll>
 
-      {/* 6. TRUST, SAFETY, AND SPIRITUAL CARE */}
-      <section aria-label="Safety, trust, and spiritual care">
-        <div className="grid gap-12 md:grid-cols-2">
-          {/* Left: Safety & Trust Bullets */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold text-foreground">
-              Safety, trust, and spiritual care
-            </h2>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Licensed and accredited programs:</strong> Every 
-                  Lionheart center meets or exceeds state licensing requirements and maintains 
-                  accreditation standards.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Security:</strong> Secure entrances, check-in/out 
-                  systems, and controlled access ensure your child's safety throughout the day.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Healthy routines and cleanliness:</strong> Daily 
-                  health checks, regular cleaning protocols, and age-appropriate hygiene practices keep 
-                  children healthy and safe.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Background checks and ongoing training:</strong> All 
-                  staff undergo thorough background checks and receive continuous training in child 
-                  development, safety, and best practices.
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-5 w-5 flex-shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  <strong className="text-foreground">Faithful, Christ-following staff:</strong> Our 
-                  teachers and caregivers model Jesus' love through their daily interactions—showing 
-                  patience, kindness, and genuine care for each child.
-                </span>
-              </li>
-            </ul>
+          {/* Quick Stats */}
+          <div className="mt-12">
+            <StatsCounter stats={lionheartStats} variant="card" className="mx-auto max-w-4xl" />
           </div>
-          {/* Right: Testimonials */}
-          <div>
-            <h2 className="mb-6 text-3xl font-bold text-foreground">What families say</h2>
-            <div className="space-y-6">
-              {[
+        </section>
+
+        {/* 4. WHY FAMILIES CHOOSE LIONHEART */}
+        <section className="py-16 md:py-20 border-t" aria-label="Why families choose Lionheart">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <Heart className="mr-1 h-3 w-3" />
+                The Lionheart Difference
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                Why Families Choose Lionheart
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                We believe every child is uniquely created and deserves exceptional care. 
+                Here's what sets us apart.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
               {
-                quote: "We found peace of mind knowing our daughter is safe, loved, and learning. The teachers truly care, and we see biblical values being taught every day. As a Christian family, we appreciate the faith integration, but we also know families of all backgrounds feel welcome here.",
-                author: "Sarah M.",
-                details: "Mom of a 3-year-old in Plano, TX",
+                icon: Heart,
+                title: "Rooted in Christ's Love",
+                description: "Every interaction is guided by biblical values of love, kindness, and respect. Your child will experience genuine care that reflects Christ's love.",
               },
               {
-                quote: "The quality of care is exceptional, and our son has grown so much socially and academically. We're grateful for the biblical foundations being woven into everything. The communication from teachers is excellent, and we feel like true partners in our child's development.",
-                author: "Michael T.",
-                details: "Dad of a 4-year-old in Arlington, TX",
+                icon: BookOpen,
+                title: "Exceptional Curriculum",
+                description: "Our trained educators use research-based early learning approaches that prepare children for kindergarten success while nurturing their natural curiosity.",
               },
               {
-                quote: "As working parents, we needed somewhere we could trust completely. Lionheart has exceeded our expectations in every way—quality, safety, and faith integration. Our daughter loves going to 'school' and comes home talking about Bible stories and showing us what she learned.",
-                author: "Jennifer L.",
-                details: "Mom of twins, 2 years old, in McKinney, TX",
+                icon: Shield,
+                title: "Safe, Secure Environments",
+                description: "Licensed and accredited centers with secure entry systems, health protocols, and background-checked staff give you peace of mind.",
               },
-              ].map((testimonial, index) => (
-                <Card key={index}>
-                  <CardContent className="pt-6">
-                    <div className="mb-4 flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="h-4 w-4 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
+              {
+                icon: Users,
+                title: "Support for Working Families",
+                description: "Flexible schedules, extended hours, and regular communication help busy parents balance work and family life with confidence.",
+              },
+            ].map((item, index) => (
+              <StaggerItem key={index}>
+                <Card className="h-full hover-lift group">
+                  <CardHeader>
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                      <item.icon className="h-6 w-6" />
                     </div>
-                    <p className="mb-4 text-muted-foreground italic">
-                      "{testimonial.quote}"
-                    </p>
-                    <div>
-                      <p className="font-semibold text-foreground">{testimonial.author}</p>
-                      <p className="text-sm text-muted-foreground">{testimonial.details}</p>
-                    </div>
+                    <CardTitle>{item.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{item.description}</p>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </section>
 
-      {/* 7. VISUAL PROOF OF ENVIRONMENT */}
-      <section aria-label="See our classrooms">
-        <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">See our classrooms</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Take a peek inside our warm, inviting learning environments where children explore, create, 
-            and grow.
-          </p>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              name: "Infant classroom",
-              description: "Safe, nurturing spaces for our youngest learners",
-              alt: "Infant classroom at Lionheart Children's Academy",
-            },
-            {
-              name: "Toddler play area",
-              description: "Creative exploration and sensory play",
-              alt: "Toddler play area at Lionheart Children's Academy",
-            },
-            {
-              name: "Circle time / Bible story",
-              description: "Children gathered for story time and learning",
-              alt: "Circle time with Bible story at Lionheart Children's Academy",
-            },
-            {
-              name: "Outdoor playground",
-              description: "Safe outdoor play and physical development",
-              alt: "Outdoor playground at Lionheart Children's Academy",
-            },
-          ].map((image, index) => (
-            <div
-              key={index}
-              className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-muted shadow-md transition-shadow hover:shadow-lg"
-            >
-              <div className="flex h-full items-center justify-center">
-                <div className="text-center">
-                  <Users className="mx-auto mb-2 h-12 w-12 text-muted-foreground" />
-                  <span className="block text-sm font-medium text-muted-foreground">
-                    {image.name}
-                  </span>
-                  <span className="mt-1 block text-xs text-muted-foreground/70">
-                    {image.description}
-                  </span>
+        {/* 5. PROGRAMS BY AGE */}
+        <section className="py-16 md:py-20 border-t" aria-label="Programs by age">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <BookOpen className="mr-1 h-3 w-3" />
+                Age-Appropriate Learning
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                Programs for Every Stage
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                Every child is unique. Our age-appropriate programs nurture development 
+                at each stage, combining exceptional care with biblical foundations.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <StaggerContainer className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {programs.map((program, index) => (
+              <StaggerItem key={program.href}>
+                <Card className="h-full flex flex-col hover-lift group">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-xl">{program.name}</CardTitle>
+                      <Badge variant="outline" className="text-primary border-primary">
+                        {program.ageRange}
+                      </Badge>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-muted-foreground">{program.description}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Button asChild variant="ghost" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <Link href={program.href}>
+                        Learn More
+                        <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+
+          {/* Sample Daily Schedule */}
+          <AnimateOnScroll variant="fadeUp" delay={0.3} className="mt-16">
+            <Card className="overflow-hidden">
+              <CardHeader className="bg-muted/50">
+                <CardTitle className="flex items-center gap-2">
+                  <Calendar className="h-5 w-5 text-primary" />
+                  Sample Daily Schedule
+                </CardTitle>
+                <CardDescription>
+                  See how we structure a typical day for different age groups
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-6">
+                <ScheduleSelector />
+              </CardContent>
+            </Card>
+          </AnimateOnScroll>
+        </section>
+
+        {/* 6. MEET OUR TEACHERS */}
+        <section className="py-16 md:py-20 border-t" aria-label="Meet our teachers">
+          <StaffSpotlight
+            title="Meet Our Dedicated Teachers"
+            subtitle="Loving educators who make a difference every day"
+            staff={placeholderStaff}
+          />
+        </section>
+
+        {/* 7. TESTIMONIALS */}
+        <section className="py-16 md:py-20 border-t bg-muted/30 -mx-4 px-4 md:-mx-6 md:px-6" aria-label="What families say">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <Star className="mr-1 h-3 w-3" />
+                Parent Testimonials
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                What Families Are Saying
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                Don't just take our word for it. Here's what parents say about their 
+                Lionheart experience.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.2}>
+            <TestimonialCarousel
+              testimonials={sampleTestimonials}
+              variant="cards"
+              autoPlay={true}
+              className="max-w-6xl mx-auto"
+            />
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.3} className="mt-8 text-center">
+            <AggregateRating
+              rating={4.9}
+              totalReviews={312}
+              source="Google Reviews"
+              className="justify-center"
+            />
+          </AnimateOnScroll>
+        </section>
+
+        {/* 8. SAFETY & TRUST */}
+        <section className="py-16 md:py-20 border-t" aria-label="Safety and trust">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <Shield className="mr-1 h-3 w-3" />
+                Your Peace of Mind
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                Safety, Trust & Spiritual Care
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                Your child's safety and well-being are our top priorities. Every 
+                center maintains the highest standards.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.2}>
+            <SafetyFeatures />
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.3} className="mt-12">
+            <AccreditationLogos />
+          </AnimateOnScroll>
+        </section>
+
+        {/* 9. SEE OUR CLASSROOMS */}
+        <section className="py-16 md:py-20 border-t" aria-label="See our classrooms">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <Play className="mr-1 h-3 w-3" />
+                Take a Look Inside
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                See Our Classrooms
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                Take a peek inside our warm, inviting learning environments where 
+                children explore, create, and grow.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.2}>
+            <PlaceholderGallery
+              items={[
+                { name: "Infant Classroom", description: "Safe, nurturing spaces" },
+                { name: "Toddler Play Area", description: "Creative exploration" },
+                { name: "Circle Time", description: "Bible story & learning" },
+                { name: "Outdoor Playground", description: "Physical development" },
+                { name: "Art Center", description: "Creative expression" },
+                { name: "Reading Nook", description: "Literacy development" },
+                { name: "Meal Time", description: "Nutritious meals" },
+                { name: "Music Room", description: "Songs & movement" },
+              ]}
+            />
+          </AnimateOnScroll>
+
+          <AnimateOnScroll variant="fadeUp" delay={0.3} className="mt-8 text-center">
+            <Button asChild size="lg" variant="outline">
+              <Link href="/virtual-tour">
+                <Play className="mr-2 h-4 w-4" />
+                Take a Virtual Tour
+              </Link>
+            </Button>
+          </AnimateOnScroll>
+        </section>
+
+        {/* 10. CHECK AVAILABILITY */}
+        <section className="py-16 md:py-20 border-t" aria-label="Check availability">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16 items-start">
+            <AnimateOnScroll variant="slideLeft">
+              <div>
+                <Badge variant="secondary" className="mb-4">
+                  <CheckCircle2 className="mr-1 h-3 w-3" />
+                  Real-Time Availability
+                </Badge>
+                <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                  Check Program Availability
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  See which programs have openings at your preferred location. 
+                  Spots fill quickly, especially for infants and toddlers.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  {[
+                    "Real-time availability updates",
+                    "Join waitlist for full programs",
+                    "Multiple age programs available",
+                    "Easy tour scheduling",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-muted-foreground">
+                      <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll variant="slideRight">
+              <AvailabilityChecker showHeader={false} />
+            </AnimateOnScroll>
+          </div>
+        </section>
+
+        {/* 11. FAQ PREVIEW */}
+        <section className="py-16 md:py-20 border-t" aria-label="Frequently asked questions">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+            <AnimateOnScroll variant="fadeUp">
+              <div>
+                <Badge variant="secondary" className="mb-4">
+                  <BookOpen className="mr-1 h-3 w-3" />
+                  Common Questions
+                </Badge>
+                <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                  Frequently Asked Questions
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground">
+                  Find answers to the most common questions about enrollment, 
+                  programs, and what to expect.
+                </p>
+                <Button asChild className="mt-6" size="lg">
+                  <Link href="/faq">
+                    View All FAQs
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </AnimateOnScroll>
+
+            <AnimateOnScroll variant="fadeUp" delay={0.2}>
+              <CompactFAQ
+                faqs={lionheartFAQs.slice(0, 5)}
+                maxItems={5}
+              />
+            </AnimateOnScroll>
+          </div>
+        </section>
+
+        {/* 12. HOW ENROLLMENT WORKS */}
+        <section className="py-16 md:py-20 border-t" aria-label="How enrollment works">
+          <AnimateOnScroll variant="fadeUp">
+            <div className="text-center mb-12">
+              <Badge variant="secondary" className="mb-4">
+                <CheckCircle2 className="mr-1 h-3 w-3" />
+                Simple Process
+              </Badge>
+              <h2 className="text-3xl font-bold text-foreground md:text-4xl">
+                How Enrollment Works
+              </h2>
+              <p className="mt-4 mx-auto max-w-2xl text-lg text-muted-foreground">
+                Getting started with Lionheart is simple. Here's what to expect.
+              </p>
+            </div>
+          </AnimateOnScroll>
+
+          <StaggerContainer className="grid gap-8 md:grid-cols-3">
+            {[
+              {
+                step: "1",
+                title: "Schedule a Tour",
+                description: "Visit our center, meet our teachers, and see our classrooms in action. We'll answer all your questions.",
+              },
+              {
+                step: "2",
+                title: "Complete Enrollment",
+                description: "Fill out enrollment forms, submit required documents, and reserve your child's spot.",
+              },
+              {
+                step: "3",
+                title: "First Day Success",
+                description: "We'll help you prepare for a smooth transition. Your child's adventure begins!",
+              },
+            ].map((item) => (
+              <StaggerItem key={item.step}>
+                <Card className="text-center hover-lift h-full">
+                  <CardContent className="pt-8 pb-6">
+                    <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground text-2xl font-bold shadow-lg">
+                      {item.step}
+                    </div>
+                    <h3 className="mb-3 text-xl font-semibold">{item.title}</h3>
+                    <p className="text-muted-foreground">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </section>
+      </div>
+
+      {/* 13. BOTTOM CTA + TOUR FORM */}
+      <section id="tour-form" className="py-16 md:py-24 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5" aria-label="Schedule a tour">
+        <div className="mx-auto max-w-7xl px-4 md:px-6">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            {/* Left: Copy */}
+            <AnimateOnScroll variant="slideLeft">
+              <div>
+                <Badge variant="secondary" className="mb-4">
+                  <Calendar className="mr-1 h-3 w-3" />
+                  Schedule Your Visit
+                </Badge>
+                <h2 className="text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
+                  Ready to See Lionheart in Person?
+                </h2>
+                <p className="mt-6 text-lg text-muted-foreground">
+                  Schedule a tour to see our classrooms, meet our teachers, and 
+                  experience the Lionheart difference firsthand. We're here to 
+                  answer your questions and help you find the perfect fit.
+                </p>
+
+                <ul className="mt-8 space-y-4">
+                  {[
+                    "Meet our caring, qualified teachers",
+                    "See our safe, engaging classrooms",
+                    "Learn about our Christ-centered curriculum",
+                    "Get your questions answered",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-center gap-3 text-foreground">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10">
+                        <CheckCircle2 className="h-4 w-4 text-primary" />
+                      </div>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-8 flex items-center gap-4">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="h-10 w-10 rounded-full border-2 border-background bg-muted flex items-center justify-center"
+                      >
+                        <Users className="h-4 w-4 text-muted-foreground" />
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    <strong className="text-foreground">200+</strong> families scheduled tours this month
+                  </p>
+                </div>
+
+                <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Phone className="h-4 w-4" />
+                    <span>Or call: <strong className="text-foreground">(469) 555-0123</strong></span>
+                  </div>
                 </div>
               </div>
-              {/* In production, replace with: */}
-              {/* <Image
-                src={`/gallery/${index + 1}.jpg`}
-                alt={image.alt}
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-              /> */}
-            </div>
-          ))}
-        </div>
-      </section>
+            </AnimateOnScroll>
 
-      {/* 8. FAITHFUL LEARNING & CURRICULUM */}
-      <section aria-label="Learning rooted in God's love">
-        <div className="mb-8">
-          <h2 className="mb-6 text-3xl font-bold text-foreground">
-            Learning rooted in God's love
-          </h2>
-          <div className="space-y-4 text-muted-foreground">
-            <p>
-              At Lionheart Children's Academy, we integrate a Christ-centered worldview into everything 
-              we do. This means age-appropriate Bible stories, simple worship songs, and daily prayers 
-              that help children understand God's love for them. But it also means teaching kindness, 
-              empathy, and character as natural expressions of faith—values that benefit all children, 
-              regardless of their family's background.
-            </p>
-            <p>
-              Our early learning curriculum is strong and research-based. We focus on language development, 
-              early math concepts, social-emotional skills, and school readiness. Children learn through 
-              play, hands-on activities, and intentional instruction that sparks curiosity and builds 
-              confidence. We prepare your child academically while also nurturing their heart and character.
-            </p>
-            <p>
-              Whole-child development is our goal. We believe children thrive when their mind, body, and 
-              spirit are all nurtured. That's why we integrate physical activity, creative expression, 
-              academic learning, and spiritual growth into each day. Your child will leave Lionheart 
-              prepared for school success and equipped with values that will serve them throughout life.
-            </p>
-          </div>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Christ-centered environment",
-              description: "Age-appropriate Bible stories, worship, and prayer help children understand God's love in ways that are natural and engaging. Faith is woven into daily life, not taught as a separate subject.",
-            },
-            {
-              title: "Strong early learning curriculum",
-              description: "Research-based approaches to literacy, math, science, and social studies prepare children for kindergarten success. Our curriculum meets or exceeds state early learning standards.",
-            },
-            {
-              title: "Whole-child development: heart, mind, and character",
-              description: "We nurture academic growth, physical development, social skills, emotional intelligence, and character formation. Your child will grow in every area—prepared for school and equipped for life.",
-            },
-          ].map((item, index) => (
-            <Card key={index}>
-              <CardHeader>
-                <CardTitle className="text-lg">{item.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{item.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <div className="mt-8 text-center">
-          <Button asChild size="lg">
-            <Link href="/curriculum">Learn more about our curriculum</Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* 9. PARENT RESOURCES / BLOG TEASER */}
-      <section aria-label="Resources for your family">
-        <div className="mb-8 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-foreground">Resources for your family</h2>
-          <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Helpful tips and resources to support you on your parenting journey.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Helping your child with the first day of childcare",
-              description: "Practical tips to ease the transition and make your child's first day a positive experience. Learn how to prepare your child (and yourself) for this important milestone.",
-              href: "/resources/first-day",
-            },
-            {
-              title: "Raising kind kids in a busy world",
-              description: "Simple ways to teach kindness, empathy, and character in everyday moments. Biblical values made practical for busy families.",
-              href: "/resources/kindness",
-            },
-            {
-              title: "Bedtime routines that actually work",
-              description: "How to create consistent sleep schedules that support your child's development and well-being. Real strategies from parents who've been there.",
-              href: "/resources/bedtime",
-            },
-          ].map((resource) => (
-            <Card key={resource.href} className="flex flex-col">
-              <CardHeader>
-                <CardTitle className="text-lg">{resource.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow">
-                <CardDescription className="text-base">
-                  {resource.description}
-                </CardDescription>
-              </CardContent>
-              <CardFooter>
-                <Button asChild variant="link" className="p-0">
-                  <Link href={resource.href}>Read more →</Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* 10. BOTTOM CTA + TOUR FORM */}
-      <section id="tour-form" aria-label="Schedule a tour">
-        <div className="rounded-lg bg-primary/5 p-8 md:p-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
-              Ready to see Lionheart in person?
-            </h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              Schedule a tour to see our classrooms, meet our teachers, and experience the Lionheart 
-              difference firsthand. We're here to answer your questions and help you find the perfect 
-              fit for your family.
-            </p>
-            <div className="rounded-lg bg-background p-6 shadow-sm">
-              <HomeTourForm />
-            </div>
+            {/* Right: Form */}
+            <AnimateOnScroll variant="slideRight">
+              <MultiStepTourForm className="shadow-2xl" />
+            </AnimateOnScroll>
           </div>
         </div>
       </section>

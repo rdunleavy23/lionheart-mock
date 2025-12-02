@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
@@ -12,9 +11,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent } from "@/components/ui/card";
-import { MapPin, Search } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { 
+  MapPin, 
+  Search, 
+  ChevronRight, 
+  Clock, 
+  Calendar,
+  CheckCircle2,
+  Phone,
+} from "lucide-react";
 import { formatDistance } from "@/lib/distance";
 import type { Location } from "@/lib/locations-data";
 
@@ -40,128 +45,128 @@ export function LocationsList({
   onStateFilterChange,
   states,
 }: LocationsListProps) {
-  // Group locations by state
-  const locationsByState = React.useMemo(() => {
-    const grouped: Record<string, Location[]> = {};
-    locations.forEach((location) => {
-      if (!grouped[location.state]) {
-        grouped[location.state] = [];
-      }
-      grouped[location.state].push(location);
-    });
-    // Sort states alphabetically
-    const sortedStates = Object.keys(grouped).sort();
-    return sortedStates.map((state) => ({
-      state,
-      locations: grouped[state].sort((a, b) => a.city.localeCompare(b.city)),
-    }));
-  }, [locations]);
-
   return (
     <div className="flex flex-col">
-      {/* Search and Filter Toolbar */}
-      <div className="mb-6 space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="location-search" className="text-sm font-medium">
-            Search by city or ZIP
-          </Label>
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              id="location-search"
-              type="text"
-              placeholder="Enter city or ZIP"
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-9"
-              aria-label="Search locations by city or ZIP code"
-            />
-          </div>
+      {/* Search and Filter - Responsive */}
+      <div className="space-y-2 sm:space-y-0 sm:flex sm:gap-2 mb-4">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground pointer-events-none" />
+          <Input
+            type="text"
+            placeholder="Search city or ZIP..."
+            value={searchQuery}
+            onChange={(e) => onSearchChange(e.target.value)}
+            className="pl-9 h-12 sm:h-10 text-base sm:text-sm"
+            aria-label="Search locations"
+          />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="state-filter" className="text-sm font-medium">
-            Filter by state
-          </Label>
-          <Select value={stateFilter} onValueChange={onStateFilterChange}>
-            <SelectTrigger id="state-filter" aria-label="Filter locations by state">
-              <SelectValue placeholder="All states" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="All">All states</SelectItem>
-              {states.map((state) => (
-                <SelectItem key={state} value={state}>
-                  {state}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+        <Select value={stateFilter} onValueChange={onStateFilterChange}>
+          <SelectTrigger className="h-12 sm:h-10 sm:w-[140px] text-base sm:text-sm">
+            <SelectValue placeholder="All states" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="All">All states</SelectItem>
+            {states.map((state) => (
+              <SelectItem key={state} value={state}>
+                {state}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
-      {/* Results Count */}
+      {/* Results */}
       {locations.length === 0 ? (
-        <div className="py-8 text-center">
-          <p className="text-muted-foreground">No locations found. Try adjusting your search.</p>
+        <div className="py-16 text-center">
+          <MapPin className="mx-auto h-12 w-12 text-muted-foreground/30 mb-4" />
+          <p className="text-muted-foreground font-medium">No centers found</p>
+          <p className="text-sm text-muted-foreground mt-1">Try adjusting your search</p>
         </div>
       ) : (
-        <>
-          {/* Locations grouped by state */}
-          <div className="flex-grow space-y-6">
-            <h2 className="text-xl font-semibold text-foreground">Browse by State</h2>
-            {locationsByState.map(({ state, locations: stateLocations }) => (
-              <div key={state} className="space-y-2">
-                <h3 className="text-base font-semibold text-foreground">{state}</h3>
-                <ul className="space-y-1" role="list">
-                  {stateLocations.map((location) => {
-                    const isSelected = selectedLocation.slug === location.slug;
-                    return (
-                      <li key={location.slug}>
-                        <button
-                          onClick={() => onLocationSelect(location)}
-                          className={`group w-full rounded-lg border-l-4 px-3 py-2.5 text-left text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${
-                            isSelected
-                              ? "border-primary bg-primary/5 font-medium text-foreground shadow-sm"
-                              : "border-transparent bg-background text-muted-foreground hover:border-primary/30 hover:bg-accent/50 hover:text-accent-foreground"
-                          }`}
-                          aria-pressed={isSelected}
-                          aria-current={isSelected ? "true" : undefined}
-                          aria-label={`Select ${location.label || location.name} location`}
-                        >
-                          <div className="flex items-center gap-2">
-                            <MapPin
-                              className={`h-4 w-4 flex-shrink-0 ${
-                                isSelected ? "text-primary" : "text-muted-foreground"
-                              }`}
-                            />
-                            <span>
-                              {location.label ||
-                                `${location.city}, ${location.state.slice(0, 2).toUpperCase()}`}
-                            </span>
-                          </div>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            ))}
+        <div className="space-y-2">
+          {/* Results count - Hidden on mobile, visible on desktop */}
+          <p className="hidden lg:block text-xs text-muted-foreground pb-1">
+            {locations.length} center{locations.length !== 1 ? "s" : ""}
+          </p>
+
+          {/* Location Cards - Responsive sizing */}
+          <div className="space-y-2 sm:space-y-1.5">
+            {locations.map((location) => {
+              const isSelected = selectedLocation.slug === location.slug;
+              return (
+                <Link
+                  key={location.slug}
+                  href={`/locations/${location.slug}`}
+                  onMouseEnter={() => onLocationSelect(location)}
+                  onFocus={() => onLocationSelect(location)}
+                  onClick={() => onLocationSelect(location)}
+                  className={`
+                    flex items-center justify-between gap-3 
+                    p-4 sm:p-3
+                    rounded-xl sm:rounded-lg 
+                    border transition-all 
+                    active:scale-[0.98]
+                    ${isSelected 
+                      ? "border-primary bg-primary/5 shadow-sm" 
+                      : "border-border/50 bg-card hover:bg-accent/30 hover:border-border"
+                    }
+                  `}
+                >
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <h3 className="font-semibold text-foreground text-base sm:text-sm">
+                        {location.city}, {location.state.split(" ")[0].slice(0, 2).toUpperCase()}
+                      </h3>
+                      {location.distance && (
+                        <span className="text-xs text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+                          {formatDistance(location.distance)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        Mon-Fri
+                      </span>
+                      <span className="flex items-center gap-1 text-primary font-medium">
+                        <CheckCircle2 className="h-3 w-3" />
+                        Open
+                      </span>
+                    </div>
+                    {/* Phone - visible on mobile for quick tap-to-call */}
+                    {location.phone && (
+                      <a 
+                        href={`tel:${location.phone}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 mt-2 text-xs text-primary hover:underline sm:hidden"
+                      >
+                        <Phone className="h-3 w-3" />
+                        {location.phone}
+                      </a>
+                    )}
+                  </div>
+                  <ChevronRight className={`h-5 w-5 sm:h-4 sm:w-4 flex-shrink-0 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Schedule Tour CTA */}
-          <Card className="mt-8 border-primary/20 bg-primary/5">
-            <CardContent className="pt-6">
-              <div className="space-y-3 text-center">
-                <h3 className="text-lg font-semibold text-foreground">Ready to Visit?</h3>
-                <p className="text-sm text-muted-foreground">
-                  Schedule a tour to see our classrooms and meet our teachers in person.
-                </p>
-                <Button asChild size="lg" className="w-full font-semibold">
-                  <Link href="/#tour-form">Schedule a Tour</Link>
-                </Button>
+          {/* Bottom CTA - Responsive */}
+          <div className="mt-4 p-4 sm:p-3 rounded-xl sm:rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 sm:h-8 sm:w-8 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <Calendar className="h-5 w-5 sm:h-4 sm:w-4 text-primary" />
               </div>
-            </CardContent>
-          </Card>
-        </>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-semibold text-foreground">Ready to visit?</p>
+                <p className="text-xs text-muted-foreground hidden sm:block">Meet our teachers in person</p>
+              </div>
+              <Button asChild size="sm" className="flex-shrink-0">
+                <Link href="/#tour-form">Schedule Tour</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

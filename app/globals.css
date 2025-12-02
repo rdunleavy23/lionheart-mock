@@ -232,3 +232,657 @@ p, li, span {
     letter-spacing: var(--tracking-normal);
   }
 }
+
+/* ========================================
+   BEST-IN-CLASS ANIMATIONS & EFFECTS
+   ======================================== */
+
+/* Animation timing variables */
+:root {
+  --transition-fast: 150ms ease-out;
+  --transition-base: 200ms ease-out;
+  --transition-slow: 300ms ease-out;
+  --transition-spring: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  
+  /* Hover effects */
+  --hover-lift: -4px;
+  --hover-scale: 1.02;
+  --hover-glow-primary: 0 8px 24px -8px oklch(0.7144 0.1378 120.0504 / 0.35);
+  --hover-glow-secondary: 0 8px 24px -8px oklch(0.7423 0.0810 235.7292 / 0.25);
+  
+  /* Skeleton loading */
+  --skeleton-base: oklch(0.9 0.01 250);
+  --skeleton-shine: oklch(0.95 0.005 250);
+}
+
+.dark {
+  --skeleton-base: oklch(0.3 0.02 250);
+  --skeleton-shine: oklch(0.35 0.02 250);
+}
+
+/* ========================================
+   KEYFRAME ANIMATIONS
+   ======================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.7144 0.1378 120.0504 / 0.4); }
+  50% { box-shadow: 0 0 20px 4px oklch(0.7144 0.1378 120.0504 / 0.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes countUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes ken-burns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.1) translate(-2%, -1%); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========================================
+   UTILITY ANIMATION CLASSES
+   ======================================== */
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton-base) 0%,
+    var(--skeleton-shine) 50%,
+    var(--skeleton-base) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-ken-burns {
+  animation: ken-burns 20s ease-out forwards;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Stagger delay utilities */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
+
+/* Start invisible for animations */
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+}
+
+/* ========================================
+   INTERACTIVE HOVER EFFECTS
+   ======================================== */
+
+/* Card lift effect */
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(var(--hover-lift));
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card with glow */
+.hover-glow {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--hover-glow-primary);
+}
+
+/* Button scale effect */
+.hover-scale {
+  transition: transform var(--transition-fast);
+}
+
+.hover-scale:hover {
+  transform: scale(var(--hover-scale));
+}
+
+/* Image zoom on hover */
+.hover-zoom {
+  overflow: hidden;
+}
+
+.hover-zoom img,
+.hover-zoom .zoom-target {
+  transition: transform var(--transition-slow);
+}
+
+.hover-zoom:hover img,
+.hover-zoom:hover .zoom-target {
+  transform: scale(1.05);
+}
+
+/* Underline grow animation */
+.hover-underline {
+  position: relative;
+}
+
+.hover-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width var(--transition-base);
+}
+
+.hover-underline:hover::after {
+  width: 100%;
+}
+
+/* ========================================
+   SKELETON LOADERS
+   ======================================== */
+
+.skeleton {
+  background: var(--skeleton-base);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--skeleton-shine) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton-text {
+  height: 1em;
+  width: 100%;
+}
+
+.skeleton-heading {
+  height: 1.5em;
+  width: 60%;
+}
+
+.skeleton-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+.skeleton-card {
+  height: 200px;
+  width: 100%;
+}
+
+.skeleton-image {
+  aspect-ratio: 4/3;
+  width: 100%;
+}
+
+/* ========================================
+   VIDEO HERO STYLES
+   ======================================== */
+
+.video-hero {
+  position: relative;
+  width: 100%;
+  min-height: 70vh;
+  overflow: hidden;
+}
+
+.video-hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.video-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    oklch(0 0 0 / 0.4) 0%,
+    oklch(0 0 0 / 0.5) 50%,
+    oklch(0 0 0 / 0.6) 100%
+  );
+  z-index: 5;
+}
+
+.video-hero video,
+.video-hero .hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================
+   GALLERY LIGHTBOX STYLES
+   ======================================== */
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(0 0 0 / 0.9);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+}
+
+/* ========================================
+   PROGRESS INDICATOR
+   ======================================== */
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.progress-step {
+  width: 2.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--muted);
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.progress-step.active {
+  background: var(--primary);
+}
+
+.progress-step.completed {
+  background: var(--primary);
+}
+
+/* Circle variant */
+.progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muted);
+  border: 2px solid var(--border);
+  transition: all var(--transition-base);
+}
+
+.progress-dot.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.2);
+}
+
+.progress-dot.completed {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* ========================================
+   AVAILABILITY STATUS BADGES
+   ======================================== */
+
+.status-available {
+  --status-color: oklch(0.7 0.15 145);
+  background: oklch(0.7 0.15 145 / 0.15);
+  color: oklch(0.5 0.15 145);
+  border: 1px solid oklch(0.7 0.15 145 / 0.3);
+}
+
+.status-limited {
+  --status-color: oklch(0.75 0.15 85);
+  background: oklch(0.75 0.15 85 / 0.15);
+  color: oklch(0.55 0.15 85);
+  border: 1px solid oklch(0.75 0.15 85 / 0.3);
+}
+
+.status-waitlist {
+  --status-color: oklch(0.65 0.2 25);
+  background: oklch(0.65 0.2 25 / 0.15);
+  color: oklch(0.5 0.2 25);
+  border: 1px solid oklch(0.65 0.2 25 / 0.3);
+}
+
+/* ========================================
+   DAILY SCHEDULE TIMELINE
+   ======================================== */
+
+.timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary) 0%,
+    var(--secondary) 50%,
+    var(--muted) 100%
+  );
+  border-radius: 1px;
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0.25rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 2px solid var(--primary);
+  z-index: 1;
+}
+
+.timeline-item.active::before {
+  background: var(--primary);
+  box-shadow: 0 0 0 4px oklch(0.7144 0.1378 120.0504 / 0.2);
+}
+
+/* ========================================
+   STATS COUNTER
+   ======================================== */
+
+.stat-counter {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid var(--border);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  margin-top: 0.25rem;
+}
+
+/* ========================================
+   TRUST BADGES
+   ======================================== */
+
+.trust-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.trust-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.trust-badge-icon {
+  color: var(--primary);
+}
+
+/* ========================================
+   FORM ENHANCEMENTS
+   ======================================== */
+
+.form-group {
+  position: relative;
+}
+
+.form-group .floating-label {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--muted-foreground);
+  pointer-events: none;
+  transition: all var(--transition-fast);
+  background: var(--card);
+  padding: 0 0.25rem;
+}
+
+.form-group input:focus ~ .floating-label,
+.form-group input:not(:placeholder-shown) ~ .floating-label {
+  top: 0;
+  font-size: 0.75rem;
+  color: var(--primary);
+}
+
+/* ========================================
+   REDUCED MOTION
+   ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .animate-ken-burns {
+    animation: none;
+    transform: scale(1.05);
+  }
+}
+
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+/* Thin scrollbar for webkit browsers */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.3);
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.5);
+}
+
+/* Firefox */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+}
+
+/* Hide scrollbar but keep functionality on mobile */
+@media (max-width: 1023px) {
+  .scrollbar-thin::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-thin {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

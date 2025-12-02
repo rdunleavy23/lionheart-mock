@@ -46,16 +46,14 @@ export function SiteHeader() {
           className="flex items-center transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label="Lionheart Children's Academy Home"
         >
-          <div className="relative flex h-10 items-center rounded-md bg-black px-3 py-2">
-            <Image
-              src="/lionheart-logo.png"
-              alt="Lionheart Children's Academy"
-              width={282}
-              height={91}
-              className="h-8 w-auto object-contain"
-              priority
-            />
-          </div>
+          <Image
+            src="/images/logo.svg"
+            alt="Lionheart Children's Academy"
+            width={140}
+            height={45}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -97,16 +95,15 @@ export function SiteHeader() {
           </SheetTrigger>
           <SheetContent side="right" className="w-[300px] sm:w-[400px]">
             <SheetHeader>
+              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
               <div className="flex items-center">
-                <div className="relative flex h-8 items-center rounded-md bg-black px-2 py-1.5">
-                  <Image
-                    src="/lionheart-logo.png"
-                    alt="Lionheart Children's Academy"
-                    width={282}
-                    height={91}
-                    className="h-6 w-auto object-contain"
-                  />
-                </div>
+                <Image
+                  src="/images/logo.svg"
+                  alt="Lionheart Children's Academy"
+                  width={120}
+                  height={39}
+                  className="h-8 w-auto object-contain"
+                />
               </div>
             </SheetHeader>
             <nav className="mt-8 flex flex-col space-y-3" aria-label="Mobile navigation">
